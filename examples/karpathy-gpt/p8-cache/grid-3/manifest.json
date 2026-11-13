@@ -1,0 +1,61 @@
+{
+    "video":  "Andrej Karpathy【中英⚡从零构建 GPT（重制版）|Neural Networks: Zero to Hero】",
+    "part":  "P8 State of GPT ｜ BRK216HFS",
+    "bvid":  "BV1mqrTBvEaf",
+    "page":  8,
+    "range":  "21:20 ~ 32:00",
+    "count":  6,
+    "grid":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\grid.jpg",
+    "gridSize":  "1224x450",
+    "gridTokenEst":  585,
+    "cells":  [
+                  {
+                      "index":  1,
+                      "time":  "21:20",
+                      "sec":  1280,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=1280",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\frames\\BV1mqrTBvEaf_P8_1280s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\cell_01.jpg"
+                  },
+                  {
+                      "index":  2,
+                      "time":  "23:28",
+                      "sec":  1408,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=1408",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\frames\\BV1mqrTBvEaf_P8_1408s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\cell_02.jpg"
+                  },
+                  {
+                      "index":  3,
+                      "time":  "25:36",
+                      "sec":  1536,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=1536",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\frames\\BV1mqrTBvEaf_P8_1536s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\cell_03.jpg"
+                  },
+                  {
+                      "index":  4,
+                      "time":  "27:44",
+                      "sec":  1664,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=1664",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\frames\\BV1mqrTBvEaf_P8_1664s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\cell_04.jpg"
+                  },
+                  {
+                      "index":  5,
+                      "time":  "29:52",
+                      "sec":  1792,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=1792",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\frames\\BV1mqrTBvEaf_P8_1792s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\cell_05.jpg"
+                  },
+                  {
+                      "index":  6,
+                      "time":  "32:00",
+                      "sec":  1920,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=1920",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\frames\\BV1mqrTBvEaf_P8_1920s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-3\\cell_06.jpg"
+                  }
+              ]
+}

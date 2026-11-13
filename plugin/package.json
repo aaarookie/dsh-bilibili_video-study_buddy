@@ -1,0 +1,60 @@
+{
+  "name": "dsh-study-buddy",
+  "version": "0.1.1",
+  "description": "Bilibili course study buddy for DeepSeek Harness: timestamped frame capture, range scan grids, AI subtitle verification, and windowed ASR.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "index.js",
+    "lib/",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "bilibili",
+    "study",
+    "course",
+    "screenshot",
+    "asr",
+    "notes"
+  ],
+  "author": "aaarookie",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaarookie/dsh-bilibili_video-study_buddy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aaarookie/dsh-bilibili_video-study_buddy/issues"
+  },
+  "homepage": "https://github.com/aaarookie/dsh-bilibili_video-study_buddy#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.2.0-rc.2 <0.3.0-0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
+  }
+}

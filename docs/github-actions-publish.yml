@@ -1,0 +1,42 @@
+# 自动发布样例：复制到 .github/workflows/publish.yml 即生效
+#
+# 为什么放在 docs 而不是直接用：
+#   本机 git 凭证来自 VS Code 的 OAuth App token（gho_ 前缀），不含 workflow scope，
+#   GitHub 会拒绝任何修改 .github/workflows/ 的推送。
+#   要启用它，二选一：
+#     A. 在 GitHub 网页直接新建 .github/workflows/publish.yml 并粘贴下面的内容
+#     B. 换一个带 workflow scope 的 PAT（classic token 勾选 workflow）
+#   还需要在仓库 Settings → Secrets → Actions 里加 NPM_TOKEN（npm Automation token）。
+#
+# 用法：打 tag 即发布
+#   git tag v0.1.1 && git push origin v0.1.1
+name: publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish to npm
+        working-directory: plugin
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true

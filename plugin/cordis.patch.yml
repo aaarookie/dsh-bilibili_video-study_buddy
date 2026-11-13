@@ -1,0 +1,14 @@
+# dsh-study-buddy bundle patch
+# profile 的 dsh.profile.bundles 列出本包名即整层生效
+- insert:
+    - id: dsh-study-buddy
+      name: dsh-study-buddy
+      config:
+        # 可选：覆盖凭证文件路径；留空则依次找
+        #   $DSH_HOME/bili-watch/credential.json
+        #   ~/.dsh/bili-watch/credential.json
+        credentialFile: ""
+        # 可选：ffmpeg 可执行文件；留空走 PATH
+        ffmpeg: ""
+        # 可选：faster-whisper 的 python 解释器（只有 study_asr 需要）
+        python: ""

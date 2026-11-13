@@ -1,0 +1,4615 @@
+{
+ "lang": "en",
+ "lang_prob": 1,
+ "audio_seconds": 2559.88,
+ "offset": 0.0,
+ "elapsed": 226.11,
+ "count": 921,
+ "items": [
+  {
+   "from": 7.98,
+   "to": 12.3,
+   "text": "Please welcome AI researcher and founding member of OpenAI,"
+  },
+  {
+   "from": 12.3,
+   "to": 23.73,
+   "text": "Andre Carpathi."
+  },
+  {
+   "from": 23.73,
+   "to": 26.93,
+   "text": "I'm happy to be here to tell you about the state of GPT"
+  },
+  {
+   "from": 26.93,
+   "to": 30.85,
+   "text": "and more generally about the rapidly growing ecosystem of large language"
+  },
+  {
+   "from": 30.85,
+   "to": 33.33,
+   "text": "models. So I would like to partition the talk"
+  },
+  {
+   "from": 33.33,
+   "to": 36.29,
+   "text": "into two parts. In the first part, I would like"
+  },
+  {
+   "from": 36.29,
+   "to": 39.33,
+   "text": "to tell you about how we train GPT assistance."
+  },
+  {
+   "from": 39.33,
+   "to": 42.85,
+   "text": "And then in the second part, we are going to take a look at how we can use"
+  },
+  {
+   "from": 42.85,
+   "to": 46.53,
+   "text": "these assistance effectively for your applications."
+  },
+  {
+   "from": 46.53,
+   "to": 50.53,
+   "text": "So first let's take a look at the emerging recipe for how to train these assistants and"
+  },
+  {
+   "from": 50.53,
+   "to": 54.01,
+   "text": "keep in mind that this is all very new and still rapidly evolving, but so far the recipe"
+  },
+  {
+   "from": 54.01,
+   "to": 55.97,
+   "text": "looks something like this."
+  },
+  {
+   "from": 55.97,
+   "to": 60.21,
+   "text": "Now this is kind of a complicated slide, so I'm going to go through it piece by piece."
+  },
+  {
+   "from": 60.21,
+   "to": 65.61,
+   "text": "But roughly speaking we have four major stages, pre-training, supervised fine-tuning,"
+  },
+  {
+   "from": 65.61,
+   "to": 70.09,
+   "text": "reward modeling, reinforcement learning, and they follow each other serially."
+  },
+  {
+   "from": 70.09,
+   "to": 74.93,
+   "text": "Now in each stage we have a data set that powers that stage."
+  },
+  {
+   "from": 74.93,
+   "to": 76.77,
+   "text": "We have an algorithm that, for our purposes,"
+  },
+  {
+   "from": 76.77,
+   "to": 82.33,
+   "text": "will be an objective for training the neural network."
+  },
+  {
+   "from": 82.33,
+   "to": 84.05,
+   "text": "And then we have a resulting model."
+  },
+  {
+   "from": 84.05,
+   "to": 85.93,
+   "text": "And then there are some nodes on the bottom."
+  },
+  {
+   "from": 85.93,
+   "to": 87.41,
+   "text": "So the first stage we're going to start with"
+  },
+  {
+   "from": 87.41,
+   "to": 88.85,
+   "text": "is the pre-training stage."
+  },
+  {
+   "from": 88.85,
+   "to": 91.57,
+   "text": "Now, this stage is kind of special in this diagram."
+  },
+  {
+   "from": 91.57,
+   "to": 93.53,
+   "text": "And this diagram is not to scale,"
+  },
+  {
+   "from": 93.53,
+   "to": 95.61,
+   "text": "because this stage is where all of the computational work"
+  },
+  {
+   "from": 95.61,
+   "to": 96.45,
+   "text": "basically happens."
+  },
+  {
+   "from": 96.45,
+   "to": 102.01,
+   "text": "This is 99% of the training compute time and also flops."
+  },
+  {
+   "from": 102.01,
+   "to": 104.05,
+   "text": "And so this is where we are dealing"
+  },
+  {
+   "from": 104.05,
+   "to": 107.21,
+   "text": "with internet-scale data sets with thousands of GPUs"
+  },
+  {
+   "from": 107.21,
+   "to": 111.45,
+   "text": "in the supercomputer and also months of training potentially."
+  },
+  {
+   "from": 111.45,
+   "to": 113.81,
+   "text": "The other three stages are fine-tuning stages"
+  },
+  {
+   "from": 113.81,
+   "to": 116.61,
+   "text": "that are much more along the lines of small few number"
+  },
+  {
+   "from": 116.61,
+   "to": 119.09,
+   "text": "of GPUs and hours or days."
+  },
+  {
+   "from": 119.09,
+   "to": 120.97,
+   "text": "So let's take a look at the pre-training stage"
+  },
+  {
+   "from": 120.97,
+   "to": 124.05,
+   "text": "to achieve a base model."
+  },
+  {
+   "from": 124.05,
+   "to": 127.77,
+   "text": "First, we're going to gather a large amount of data."
+  },
+  {
+   "from": 127.77,
+   "to": 130.21,
+   "text": "Here's an example of what we call a data mixture that"
+  },
+  {
+   "from": 130.21,
+   "to": 134.13,
+   "text": "comes from this paper that was released by Meta,"
+  },
+  {
+   "from": 134.13,
+   "to": 136.93,
+   "text": "where they released this Lama-based model."
+  },
+  {
+   "from": 136.93,
+   "to": 138.53,
+   "text": "Now you can see roughly the kinds of data sets"
+  },
+  {
+   "from": 138.53,
+   "to": 140.53,
+   "text": "that enter into these collections."
+  },
+  {
+   "from": 140.53,
+   "to": 142.89,
+   "text": "So we have Common Crawl, which is just a web scrape,"
+  },
+  {
+   "from": 142.89,
+   "to": 145.45,
+   "text": "C4, which is also Common Crawl,"
+  },
+  {
+   "from": 145.45,
+   "to": 147.33,
+   "text": "and then some high quality data sets as well."
+  },
+  {
+   "from": 147.33,
+   "to": 149.21,
+   "text": "So for example, GitHub, Wikipedia,"
+  },
+  {
+   "from": 149.21,
+   "to": 151.57,
+   "text": "Books, Archive, Stack Exchange, and so on."
+  },
+  {
+   "from": 151.57,
+   "to": 153.05,
+   "text": "These are all mixed up together,"
+  },
+  {
+   "from": 153.05,
+   "to": 154.97,
+   "text": "and then they are sampled according"
+  },
+  {
+   "from": 154.97,
+   "to": 156.61,
+   "text": "to some given proportions,"
+  },
+  {
+   "from": 156.61,
+   "to": 161.09,
+   "text": "And that forms the training set for the neural net for the GPT."
+  },
+  {
+   "from": 161.09,
+   "to": 163.45,
+   "text": "Now, before we can actually train on this data,"
+  },
+  {
+   "from": 163.45,
+   "to": 165.41,
+   "text": "we need to go through one more pre-processing step,"
+  },
+  {
+   "from": 165.41,
+   "to": 166.89,
+   "text": "and that is tokenization."
+  },
+  {
+   "from": 166.89,
+   "to": 168.41,
+   "text": "And this is basically a translation"
+  },
+  {
+   "from": 168.41,
+   "to": 170.91,
+   "text": "of the raw text that we scrape from the internet"
+  },
+  {
+   "from": 170.91,
+   "to": 174.25,
+   "text": "into sequences of integers, because that's"
+  },
+  {
+   "from": 174.25,
+   "to": 177.57,
+   "text": "the native representation over which GPTs function."
+  },
+  {
+   "from": 177.57,
+   "to": 180.25,
+   "text": "Now, this is a lossless kind of translation"
+  },
+  {
+   "from": 180.25,
+   "to": 183.77,
+   "text": "between pieces of text and tokens and integers."
+  },
+  {
+   "from": 183.77,
+   "to": 185.93,
+   "text": "And there are a number of algorithms for this stage,"
+  },
+  {
+   "from": 185.93,
+   "to": 189.45,
+   "text": "Typically, for example, you could use something like byte there encoding, which iteratively"
+  },
+  {
+   "from": 189.45,
+   "to": 193.97,
+   "text": "merges little text chunks and groups them into tokens."
+  },
+  {
+   "from": 193.97,
+   "to": 198.45,
+   "text": "And so here I'm showing some example chunks of these tokens, and then this is the raw integer"
+  },
+  {
+   "from": 198.45,
+   "to": 202.13,
+   "text": "sequence that will actually feed into a transformer."
+  },
+  {
+   "from": 202.13,
+   "to": 208.25,
+   "text": "Now here I'm showing two sort of like examples for hyper-primers that govern this stage."
+  },
+  {
+   "from": 208.25,
+   "to": 212.33,
+   "text": "So GPT-4, we did not release too much information about how it was trained and so on, so I'm"
+  },
+  {
+   "from": 212.33,
+   "to": 215.05,
+   "text": "I'm using GPT-3's numbers, but GPT-3 is, of course,"
+  },
+  {
+   "from": 215.05,
+   "to": 217.85,
+   "text": "a little bit old by now, about three years ago."
+  },
+  {
+   "from": 217.85,
+   "to": 220.73,
+   "text": "But Lama is a fairly recent model for meta."
+  },
+  {
+   "from": 220.73,
+   "to": 222.85,
+   "text": "So these are roughly the orders of magnitude"
+  },
+  {
+   "from": 222.85,
+   "to": 225.21,
+   "text": "that we're dealing with when we're doing pre-training."
+  },
+  {
+   "from": 225.21,
+   "to": 228.37,
+   "text": "The vocabulary size is usually a couple 10,000 tokens."
+  },
+  {
+   "from": 228.37,
+   "to": 230.61,
+   "text": "The context length is usually something like 2,000,"
+  },
+  {
+   "from": 230.61,
+   "to": 233.45,
+   "text": "4,000, or nowadays even 100,000,"
+  },
+  {
+   "from": 233.45,
+   "to": 236.41,
+   "text": "and this governs the maximum number of integers"
+  },
+  {
+   "from": 236.41,
+   "to": 237.93,
+   "text": "that the GPT will look at"
+  },
+  {
+   "from": 237.93,
+   "to": 239.61,
+   "text": "when it's trying to predict the next integer"
+  },
+  {
+   "from": 239.61,
+   "to": 240.45,
+   "text": "in a sequence."
+  },
+  {
+   "from": 240.45,
+   "to": 246.49,
+   "text": "You can see that roughly the number of parameters is, say, 65 billion for Lama."
+  },
+  {
+   "from": 246.49,
+   "to": 251.65,
+   "text": "Now even though Lama has only 65B parameters compared to GPT-3's 175 billion parameters,"
+  },
+  {
+   "from": 251.65,
+   "to": 256.33,
+   "text": "Lama is a significantly more powerful model, and intuitively that's because the model is"
+  },
+  {
+   "from": 256.33,
+   "to": 258.01,
+   "text": "trained for significantly longer."
+  },
+  {
+   "from": 258.01,
+   "to": 261.85,
+   "text": "In this case, 1.4 trillion tokens instead of just 300 billion tokens."
+  },
+  {
+   "from": 261.85,
+   "to": 265.01,
+   "text": "So you shouldn't judge the power of a model just by the number of parameters that"
+  },
+  {
+   "from": 265.01,
+   "to": 266.01,
+   "text": "it contains."
+  },
+  {
+   "from": 266.01,
+   "to": 273.09,
+   "text": "Below, I'm showing some tables of rough hyperparameters that typically go into specifying the transformer"
+  },
+  {
+   "from": 273.09,
+   "to": 277.93,
+   "text": "neural network, so the number of heads, the dimension size, number of layers, and so on."
+  },
+  {
+   "from": 277.93,
+   "to": 281.65,
+   "text": "And on the bottom, I'm showing some training hyperparameters."
+  },
+  {
+   "from": 281.65,
+   "to": 290.01,
+   "text": "So for example, to train the 65B model, Meta used 2,000 GPUs, roughly 21 days of training,"
+  },
+  {
+   "from": 290.01,
+   "to": 292.65,
+   "text": "and roughly several million dollars."
+  },
+  {
+   "from": 292.65,
+   "to": 294.21,
+   "text": "So that's the rough orders of magnitude"
+  },
+  {
+   "from": 294.21,
+   "to": 299.08,
+   "text": "that you should have in mind for the pre-training stage."
+  },
+  {
+   "from": 299.08,
+   "to": 301.18,
+   "text": "Now when we're actually pre-training what happens,"
+  },
+  {
+   "from": 301.18,
+   "to": 303.74,
+   "text": "roughly speaking, we are going to take our tokens"
+  },
+  {
+   "from": 303.74,
+   "to": 306.06,
+   "text": "and we're going to lay them out into data batches."
+  },
+  {
+   "from": 306.06,
+   "to": 309.46,
+   "text": "So we have these arrays that will feed into the transformer"
+  },
+  {
+   "from": 309.46,
+   "to": 311.86,
+   "text": "and these arrays are B, the batch size"
+  },
+  {
+   "from": 311.86,
+   "to": 315.1,
+   "text": "and these are all independent examples stacked up in rows"
+  },
+  {
+   "from": 315.1,
+   "to": 318.1,
+   "text": "and B by T, T being the maximum context length."
+  },
+  {
+   "from": 318.1,
+   "to": 321.06,
+   "text": "So in my picture I only have 10 the context length."
+  },
+  {
+   "from": 321.06,
+   "to": 323.14,
+   "text": "So this could be 2000, 4000, et cetera."
+  },
+  {
+   "from": 323.14,
+   "to": 325.06,
+   "text": "So these are extremely long rows."
+  },
+  {
+   "from": 325.06,
+   "to": 326.58,
+   "text": "And what we do is we take these documents"
+  },
+  {
+   "from": 326.58,
+   "to": 328.46,
+   "text": "and we pack them into rows, and we"
+  },
+  {
+   "from": 328.46,
+   "to": 331.82,
+   "text": "delimit them with these special end of text tokens,"
+  },
+  {
+   "from": 331.82,
+   "to": 332.94,
+   "text": "basically telling the transformer"
+  },
+  {
+   "from": 332.94,
+   "to": 335.22,
+   "text": "where a new document begins."
+  },
+  {
+   "from": 335.22,
+   "to": 338.1,
+   "text": "And so here I have a few examples of documents,"
+  },
+  {
+   "from": 338.1,
+   "to": 342.06,
+   "text": "and then I've stretched them out into this input."
+  },
+  {
+   "from": 342.06,
+   "to": 344.74,
+   "text": "Now, we're going to feed all of these numbers"
+  },
+  {
+   "from": 344.74,
+   "to": 346.26,
+   "text": "into Transformer."
+  },
+  {
+   "from": 346.26,
+   "to": 349.66,
+   "text": "And let me just focus on a single particular cell,"
+  },
+  {
+   "from": 349.66,
+   "to": 351.7,
+   "text": "but the same thing will happen at every cell"
+  },
+  {
+   "from": 351.7,
+   "to": 352.66,
+   "text": "in this diagram."
+  },
+  {
+   "from": 352.66,
+   "to": 354.7,
+   "text": "So let's look at the green cell."
+  },
+  {
+   "from": 354.7,
+   "to": 356.86,
+   "text": "The green cell is going to take a look"
+  },
+  {
+   "from": 356.86,
+   "to": 360.5,
+   "text": "at all of the tokens before it, so all of the tokens in yellow."
+  },
+  {
+   "from": 360.5,
+   "to": 363.26,
+   "text": "And we're going to feed that entire context"
+  },
+  {
+   "from": 363.26,
+   "to": 365.5,
+   "text": "into the transformer neural network."
+  },
+  {
+   "from": 365.5,
+   "to": 367.34,
+   "text": "And the transformer is going to try"
+  },
+  {
+   "from": 367.34,
+   "to": 369.5,
+   "text": "to predict the next token in a sequence, in this case,"
+  },
+  {
+   "from": 369.5,
+   "to": 370.38,
+   "text": "in red."
+  },
+  {
+   "from": 370.38,
+   "to": 372.46,
+   "text": "Now, the transformer, I don't have too much time"
+  },
+  {
+   "from": 372.46,
+   "to": 373.98,
+   "text": "to, unfortunately, go into the full details"
+  },
+  {
+   "from": 373.98,
+   "to": 375.58,
+   "text": "of this neural network architecture."
+  },
+  {
+   "from": 375.58,
+   "to": 378.06,
+   "text": "It's just a large blob of neural net stuff"
+  },
+  {
+   "from": 378.06,
+   "to": 379.06,
+   "text": "for our purposes."
+  },
+  {
+   "from": 379.06,
+   "to": 381.62,
+   "text": "And it's got several 10 billion parameters typically"
+  },
+  {
+   "from": 381.62,
+   "to": 382.62,
+   "text": "or something like that."
+  },
+  {
+   "from": 382.62,
+   "to": 384.02,
+   "text": "And of course, as we tune these parameters,"
+  },
+  {
+   "from": 384.02,
+   "to": 386.62,
+   "text": "you're getting slightly different predicted distributions"
+  },
+  {
+   "from": 386.62,
+   "to": 389.22,
+   "text": "for every single one of these cells."
+  },
+  {
+   "from": 389.22,
+   "to": 393.74,
+   "text": "And so for example, if our vocabulary size is 50,257"
+  },
+  {
+   "from": 393.74,
+   "to": 396.42,
+   "text": "tokens, then we're going to have that many numbers"
+  },
+  {
+   "from": 396.42,
+   "to": 399.1,
+   "text": "because we need to specify a probability distribution"
+  },
+  {
+   "from": 399.1,
+   "to": 400.34,
+   "text": "for what comes next."
+  },
+  {
+   "from": 400.34,
+   "to": 403.18,
+   "text": "So basically we have a probability for whatever may follow."
+  },
+  {
+   "from": 403.18,
+   "to": 405.5,
+   "text": "Now in this specific example for this specific cell,"
+  },
+  {
+   "from": 405.5,
+   "to": 407.42,
+   "text": "513 will come next."
+  },
+  {
+   "from": 407.42,
+   "to": 409.86,
+   "text": "And so we can use this as a source of supervision"
+  },
+  {
+   "from": 409.86,
+   "to": 411.7,
+   "text": "to update our transformers weights."
+  },
+  {
+   "from": 411.7,
+   "to": 414.04,
+   "text": "And so we're applying this basically on every single cell"
+  },
+  {
+   "from": 414.04,
+   "to": 416.82,
+   "text": "in the parallel, and we keep swapping batches,"
+  },
+  {
+   "from": 416.82,
+   "to": 418.26,
+   "text": "and we're trying to get the transformer"
+  },
+  {
+   "from": 418.26,
+   "to": 419.98,
+   "text": "to make the correct predictions over what"
+  },
+  {
+   "from": 419.98,
+   "to": 421.78,
+   "text": "token comes next in a sequence."
+  },
+  {
+   "from": 421.78,
+   "to": 424.06,
+   "text": "So let me show you more concretely what this looks like"
+  },
+  {
+   "from": 424.06,
+   "to": 425.78,
+   "text": "when you train one of these models."
+  },
+  {
+   "from": 425.78,
+   "to": 428.18,
+   "text": "This is actually coming from New York Times,"
+  },
+  {
+   "from": 428.18,
+   "to": 431.14,
+   "text": "and they trained a small GPT on Shakespeare."
+  },
+  {
+   "from": 431.14,
+   "to": 432.98,
+   "text": "And so here's a small snippet of Shakespeare,"
+  },
+  {
+   "from": 432.98,
+   "to": 434.74,
+   "text": "and they trained a GPT on it."
+  },
+  {
+   "from": 434.74,
+   "to": 437.26,
+   "text": "Now in the beginning at initialization,"
+  },
+  {
+   "from": 437.26,
+   "to": 439.3,
+   "text": "the GPT starts with completely random weights."
+  },
+  {
+   "from": 439.3,
+   "to": 442.54,
+   "text": "So you're just getting completely random outputs as well."
+  },
+  {
+   "from": 442.54,
+   "to": 446.22,
+   "text": "But over time, as you train the GPT longer and longer,"
+  },
+  {
+   "from": 446.22,
+   "to": 449.7,
+   "text": "you are getting more and more coherent and consistent"
+  },
+  {
+   "from": 449.7,
+   "to": 451.54,
+   "text": "sort of samples from the model."
+  },
+  {
+   "from": 451.54,
+   "to": 452.94,
+   "text": "And the way you sample from it, of course,"
+  },
+  {
+   "from": 452.94,
+   "to": 455.54,
+   "text": "is you predict what comes next."
+  },
+  {
+   "from": 455.54,
+   "to": 456.94,
+   "text": "You sample from that distribution,"
+  },
+  {
+   "from": 456.94,
+   "to": 459.06,
+   "text": "and you keep feeding that back into the process."
+  },
+  {
+   "from": 459.06,
+   "to": 462.06,
+   "text": "And you can basically sample large sequences."
+  },
+  {
+   "from": 462.06,
+   "to": 463.82,
+   "text": "And so by the end, you see that the transformer"
+  },
+  {
+   "from": 463.82,
+   "to": 466.06,
+   "text": "has learned about words, and where to put spaces,"
+  },
+  {
+   "from": 466.06,
+   "to": 468.34,
+   "text": "and where to put commas, and so on."
+  },
+  {
+   "from": 468.34,
+   "to": 470.14,
+   "text": "And so we're making more and more consistent predictions"
+  },
+  {
+   "from": 470.14,
+   "to": 471.3,
+   "text": "over time."
+  },
+  {
+   "from": 471.3,
+   "to": 473.14,
+   "text": "These are the kinds of plots that you're looking at"
+  },
+  {
+   "from": 473.14,
+   "to": 474.86,
+   "text": "when you're doing model pre-training."
+  },
+  {
+   "from": 474.86,
+   "to": 477.98,
+   "text": "Effectively, we're looking at the loss function over time"
+  },
+  {
+   "from": 477.98,
+   "to": 478.82,
+   "text": "as you train."
+  },
+  {
+   "from": 478.82,
+   "to": 480.74,
+   "text": "And low loss means that our transformer"
+  },
+  {
+   "from": 480.74,
+   "to": 483.9,
+   "text": "is predicting the correct, is giving a higher probability"
+  },
+  {
+   "from": 483.9,
+   "to": 487.1,
+   "text": "to get the correct next integer in a sequence."
+  },
+  {
+   "from": 487.1,
+   "to": 489.02,
+   "text": "Now, what are we going to do with this model"
+  },
+  {
+   "from": 489.02,
+   "to": 491.06,
+   "text": "once we've trained it after a month?"
+  },
+  {
+   "from": 491.06,
+   "to": 494.46,
+   "text": "Well, the first thing that we noticed, the field,"
+  },
+  {
+   "from": 494.46,
+   "to": 496.82,
+   "text": "is that these models, basically,"
+  },
+  {
+   "from": 496.82,
+   "to": 498.64,
+   "text": "in the process of language modeling"
+  },
+  {
+   "from": 498.64,
+   "to": 501.3,
+   "text": "learn very powerful general representations,"
+  },
+  {
+   "from": 501.3,
+   "to": 503.74,
+   "text": "and it's possible to very efficiently fine tune them"
+  },
+  {
+   "from": 503.74,
+   "to": 505.38,
+   "text": "for any arbitrary downstream task"
+  },
+  {
+   "from": 505.38,
+   "to": 506.58,
+   "text": "you might be interested in."
+  },
+  {
+   "from": 506.58,
+   "to": 507.82,
+   "text": "So as an example, if you're interested"
+  },
+  {
+   "from": 507.82,
+   "to": 509.5,
+   "text": "in sentiment classification,"
+  },
+  {
+   "from": 509.5,
+   "to": 512.22,
+   "text": "the approach used to be that you collect"
+  },
+  {
+   "from": 512.22,
+   "to": 513.54,
+   "text": "a bunch of positives and negatives"
+  },
+  {
+   "from": 513.54,
+   "to": 517.18,
+   "text": "and then you train some kind of an NLP model for that,"
+  },
+  {
+   "from": 517.18,
+   "to": 520.32,
+   "text": "but the new approach is ignore sentiment classification,"
+  },
+  {
+   "from": 520.32,
+   "to": 523.38,
+   "text": "go off and do large language model pre-training,"
+  },
+  {
+   "from": 523.38,
+   "to": 524.82,
+   "text": "train a large transformer,"
+  },
+  {
+   "from": 524.82,
+   "to": 527.54,
+   "text": "and then you can only, you may only have a few examples"
+  },
+  {
+   "from": 527.54,
+   "to": 529.6,
+   "text": "and you can very efficiently fine tune your model"
+  },
+  {
+   "from": 529.6,
+   "to": 531.14,
+   "text": "for that task."
+  },
+  {
+   "from": 531.14,
+   "to": 533.62,
+   "text": "And so this works very well in practice."
+  },
+  {
+   "from": 533.62,
+   "to": 535.1,
+   "text": "And the reason for this is that basically"
+  },
+  {
+   "from": 535.1,
+   "to": 538.1,
+   "text": "the transformer is forced to multitask a huge amount"
+  },
+  {
+   "from": 538.1,
+   "to": 540.66,
+   "text": "of tasks in the language modeling task"
+  },
+  {
+   "from": 540.66,
+   "to": 543.3,
+   "text": "because just in terms of predicting the next token,"
+  },
+  {
+   "from": 543.3,
+   "to": 545.26,
+   "text": "it's forced to understand a lot about the structure"
+  },
+  {
+   "from": 545.26,
+   "to": 548.5,
+   "text": "of the text and all the different concepts therein."
+  },
+  {
+   "from": 550.22,
+   "to": 551.34,
+   "text": "So that was GPT-1."
+  },
+  {
+   "from": 551.34,
+   "to": 552.58,
+   "text": "Now around the time of GPT-2,"
+  },
+  {
+   "from": 552.58,
+   "to": 556.62,
+   "text": "people noticed that actually even better than fine-tuning, you can actually prompt these"
+  },
+  {
+   "from": 556.62,
+   "to": 557.62,
+   "text": "models very effectively."
+  },
+  {
+   "from": 557.62,
+   "to": 560.56,
+   "text": "So these are language models, and they want to complete documents."
+  },
+  {
+   "from": 560.56,
+   "to": 565.82,
+   "text": "So you can actually trick them into performing tasks just by arranging these fake documents."
+  },
+  {
+   "from": 565.82,
+   "to": 570.34,
+   "text": "So in this example, for example, we have some passage, and then we sort of like do QA,"
+  },
+  {
+   "from": 570.34,
+   "to": 571.34,
+   "text": "QA, QA."
+  },
+  {
+   "from": 571.34,
+   "to": 574.94,
+   "text": "This is called a few-shot prompt, and then we do Q. And then as the transformer"
+  },
+  {
+   "from": 574.94,
+   "to": 577.98,
+   "text": "is trying to complete the document, it's actually answering our question."
+  },
+  {
+   "from": 577.98,
+   "to": 581.74,
+   "text": "And so this is an example of prompt engineering a base model, making it believe that"
+  },
+  {
+   "from": 581.74,
+   "to": 585.9,
+   "text": "it's sort of imitating a document and getting it to perform a task."
+  },
+  {
+   "from": 585.9,
+   "to": 590.38,
+   "text": "And so this picked off, I think, the era of, I would say, prompting over fine-tuning and"
+  },
+  {
+   "from": 590.38,
+   "to": 594.18,
+   "text": "seeing that this actually can work extremely well on a lot of problems even without training"
+  },
+  {
+   "from": 594.18,
+   "to": 597.58,
+   "text": "any neural networks, fine-tuning, and so on."
+  },
+  {
+   "from": 597.58,
+   "to": 603.3,
+   "text": "Now since then, we've seen an entire evolutionary tree of base models that everyone has trained."
+  },
+  {
+   "from": 603.3,
+   "to": 605.5,
+   "text": "Not all of these models are available."
+  },
+  {
+   "from": 605.5,
+   "to": 608.38,
+   "text": "For example, the GPT-4 base model was never released."
+  },
+  {
+   "from": 608.38,
+   "to": 612.38,
+   "text": "The GPT-4 model that you might be interacting with over API is not a base model, it's an"
+  },
+  {
+   "from": 612.38,
+   "to": 615.94,
+   "text": "assistant model, and we're going to cover how to get those in a bit."
+  },
+  {
+   "from": 615.94,
+   "to": 621.82,
+   "text": "GPT-3 base model is available via the API under the name DaVinci, and GPT-2 base model"
+  },
+  {
+   "from": 621.82,
+   "to": 624.94,
+   "text": "is available even as weights on our GitHub repo."
+  },
+  {
+   "from": 624.94,
+   "to": 630.26,
+   "text": "But currently the best available base model probably is the Lama series from Meta, although"
+  },
+  {
+   "from": 630.26,
+   "to": 633.98,
+   "text": "it is not commercially licensed."
+  },
+  {
+   "from": 633.98,
+   "to": 636.86,
+   "text": "Now one thing to point out is base models are not systems."
+  },
+  {
+   "from": 636.86,
+   "to": 641.42,
+   "text": "They don't want to make answers to your questions."
+  },
+  {
+   "from": 641.42,
+   "to": 643.34,
+   "text": "They just want to complete documents."
+  },
+  {
+   "from": 643.34,
+   "to": 648.46,
+   "text": "So if you tell them write a poem about the bread and cheese, it will just answer questions"
+  },
+  {
+   "from": 648.46,
+   "to": 649.46,
+   "text": "with more questions."
+  },
+  {
+   "from": 649.46,
+   "to": 651.46,
+   "text": "It's just completing what it thinks is a document."
+  },
+  {
+   "from": 651.46,
+   "to": 657.1,
+   "text": "However, you can prompt them in a specific way for base models that is more likely"
+  },
+  {
+   "from": 657.1,
+   "to": 658.1,
+   "text": "to work."
+  },
+  {
+   "from": 658.1,
+   "to": 660.5,
+   "text": "So as an example, here's a poem about bread and cheese, and in that case it"
+  },
+  {
+   "from": 660.5,
+   "to": 663.06,
+   "text": "will autocomplete correctly."
+  },
+  {
+   "from": 663.06,
+   "to": 666.46,
+   "text": "You can even trick base models into being assistants."
+  },
+  {
+   "from": 666.46,
+   "to": 670.14,
+   "text": "And the way you would do this is you would create like a specific few shot prompt that"
+  },
+  {
+   "from": 670.14,
+   "to": 673.58,
+   "text": "makes it look like there's some kind of a document between a human and assistant and"
+  },
+  {
+   "from": 673.58,
+   "to": 676.58,
+   "text": "they're exchanging sort of information."
+  },
+  {
+   "from": 676.58,
+   "to": 681.14,
+   "text": "And then at the bottom you sort of put your query at the end and the base model will"
+  },
+  {
+   "from": 681.14,
+   "to": 687.02,
+   "text": "sort of like condition itself into being like a helpful assistant and kind of answer."
+  },
+  {
+   "from": 687.02,
+   "to": 689.58,
+   "text": "But this is not very reliable and doesn't work super well in practice, although"
+  },
+  {
+   "from": 689.58,
+   "to": 691.26,
+   "text": "it can be done."
+  },
+  {
+   "from": 691.26,
+   "to": 692.42,
+   "text": "So instead, we have a different path"
+  },
+  {
+   "from": 692.42,
+   "to": 695.54,
+   "text": "to make actual GPT assistance, not just base model,"
+  },
+  {
+   "from": 695.54,
+   "to": 697.3,
+   "text": "document completers."
+  },
+  {
+   "from": 697.3,
+   "to": 699.82,
+   "text": "And so that takes us into supervised fine tuning."
+  },
+  {
+   "from": 699.82,
+   "to": 701.98,
+   "text": "So in the supervised fine tuning stage,"
+  },
+  {
+   "from": 701.98,
+   "to": 705.46,
+   "text": "we are going to collect small but high quality data sets."
+  },
+  {
+   "from": 705.46,
+   "to": 707.94,
+   "text": "And in this case, we're going to ask human contractors"
+  },
+  {
+   "from": 707.94,
+   "to": 712.54,
+   "text": "to gather data of the form prompt and ideal response."
+  },
+  {
+   "from": 712.54,
+   "to": 714.5,
+   "text": "And we're going to collect lots of these, typically"
+  },
+  {
+   "from": 714.5,
+   "to": 716.9,
+   "text": "tens of thousands or something like that."
+  },
+  {
+   "from": 716.9,
+   "to": 718.74,
+   "text": "And then we're going to still do language modeling"
+  },
+  {
+   "from": 718.74,
+   "to": 719.54,
+   "text": "on this data."
+  },
+  {
+   "from": 719.54,
+   "to": 721.1,
+   "text": "So nothing changed algorithmically."
+  },
+  {
+   "from": 721.1,
+   "to": 722.9,
+   "text": "We're just swapping out a training set."
+  },
+  {
+   "from": 722.9,
+   "to": 724.62,
+   "text": "So it used to be internet documents,"
+  },
+  {
+   "from": 724.62,
+   "to": 727.42,
+   "text": "which is a high-quantity, low-quantity,"
+  },
+  {
+   "from": 727.42,
+   "to": 731.58,
+   "text": "for basically QA prompt response data."
+  },
+  {
+   "from": 731.58,
+   "to": 734.22,
+   "text": "And that is low-quantity, high-quality."
+  },
+  {
+   "from": 734.22,
+   "to": 735.58,
+   "text": "So we still do language modeling,"
+  },
+  {
+   "from": 735.58,
+   "to": 738.46,
+   "text": "and then after training we get an SFD model."
+  },
+  {
+   "from": 738.46,
+   "to": 740.3,
+   "text": "And you can actually deploy these models"
+  },
+  {
+   "from": 740.3,
+   "to": 741.5,
+   "text": "and they are actual assistants"
+  },
+  {
+   "from": 741.5,
+   "to": 743.06,
+   "text": "and they work to some extent."
+  },
+  {
+   "from": 743.06,
+   "to": 744.98,
+   "text": "Let me show you what an example demonstration"
+  },
+  {
+   "from": 744.98,
+   "to": 745.82,
+   "text": "might look like."
+  },
+  {
+   "from": 745.82,
+   "to": 747.38,
+   "text": "So here's something that a human contractor"
+  },
+  {
+   "from": 747.38,
+   "to": 748.34,
+   "text": "might come up with."
+  },
+  {
+   "from": 748.34,
+   "to": 749.7,
+   "text": "Here's some random prompt."
+  },
+  {
+   "from": 749.7,
+   "to": 751.1,
+   "text": "Can you write a short introduction"
+  },
+  {
+   "from": 751.1,
+   "to": 753.38,
+   "text": "about the relevance of the term monopsony"
+  },
+  {
+   "from": 753.38,
+   "to": 754.42,
+   "text": "or something like that?"
+  },
+  {
+   "from": 754.42,
+   "to": 757.5,
+   "text": "And then the contractor also writes out an ideal response."
+  },
+  {
+   "from": 757.5,
+   "to": 758.9,
+   "text": "And when they write out these responses,"
+  },
+  {
+   "from": 758.9,
+   "to": 761.58,
+   "text": "they are following extensive labeling documentations."
+  },
+  {
+   "from": 761.58,
+   "to": 765.58,
+   "text": "And they are being asked to be helpful, truthful, and harmless."
+  },
+  {
+   "from": 765.58,
+   "to": 768.5,
+   "text": "And those labeling instructions here,"
+  },
+  {
+   "from": 768.5,
+   "to": 770.9,
+   "text": "you probably can't read it, neither can I."
+  },
+  {
+   "from": 770.9,
+   "to": 772.5,
+   "text": "But they're long, and this is just"
+  },
+  {
+   "from": 772.5,
+   "to": 773.86,
+   "text": "people following instructions and trying"
+  },
+  {
+   "from": 773.86,
+   "to": 775.74,
+   "text": "to complete these prompts."
+  },
+  {
+   "from": 775.74,
+   "to": 777.46,
+   "text": "So that's what the dataset looks like."
+  },
+  {
+   "from": 777.46,
+   "to": 778.46,
+   "text": "And you can train these models."
+  },
+  {
+   "from": 778.46,
+   "to": 780.36,
+   "text": "and this works to some extent."
+  },
+  {
+   "from": 780.36,
+   "to": 783.36,
+   "text": "Now, you can actually continue the pipeline from here on"
+  },
+  {
+   "from": 783.36,
+   "to": 787.24,
+   "text": "and go into RLHF, Reinforcement Learning from Human Feedback,"
+  },
+  {
+   "from": 787.24,
+   "to": 789.12,
+   "text": "that consists of both reward modeling"
+  },
+  {
+   "from": 789.12,
+   "to": 790.56,
+   "text": "and reinforcement learning."
+  },
+  {
+   "from": 790.56,
+   "to": 792.28,
+   "text": "So let me cover that, and then I'll come back"
+  },
+  {
+   "from": 792.28,
+   "to": 794.08,
+   "text": "to why you may wanna go through the extra steps"
+  },
+  {
+   "from": 794.08,
+   "to": 796.64,
+   "text": "and how that compares to just SFD models."
+  },
+  {
+   "from": 796.64,
+   "to": 798.12,
+   "text": "So in the reward modeling step,"
+  },
+  {
+   "from": 798.12,
+   "to": 799.8,
+   "text": "what we're going to do is we're now going"
+  },
+  {
+   "from": 799.8,
+   "to": 801.32,
+   "text": "to shift our data collection to be"
+  },
+  {
+   "from": 801.32,
+   "to": 803.16,
+   "text": "of the form of comparisons."
+  },
+  {
+   "from": 803.16,
+   "to": 805.8,
+   "text": "So here's an example of what our dataset will look like."
+  },
+  {
+   "from": 805.8,
+   "to": 808.44,
+   "text": "I have the same prompt, identical prompt on the top,"
+  },
+  {
+   "from": 808.44,
+   "to": 812.8,
+   "text": "which is asking the assistant to write a program or a function"
+  },
+  {
+   "from": 812.8,
+   "to": 815.56,
+   "text": "that checks if a given string is a palindrome."
+  },
+  {
+   "from": 815.56,
+   "to": 818.2,
+   "text": "And then what we do is we take the SFT model,"
+  },
+  {
+   "from": 818.2,
+   "to": 819.56,
+   "text": "which we've already trained,"
+  },
+  {
+   "from": 819.56,
+   "to": 821.12,
+   "text": "and we create multiple completions."
+  },
+  {
+   "from": 821.12,
+   "to": 822.44,
+   "text": "So in this case, we have three completions"
+  },
+  {
+   "from": 822.44,
+   "to": 824.2,
+   "text": "that the model has created."
+  },
+  {
+   "from": 824.2,
+   "to": 827.0,
+   "text": "And then we ask people to rank these completions."
+  },
+  {
+   "from": 827.0,
+   "to": 829.2,
+   "text": "So if you stare at this for a while,"
+  },
+  {
+   "from": 829.2,
+   "to": 830.96,
+   "text": "and by the way, these are very difficult things to do"
+  },
+  {
+   "from": 830.96,
+   "to": 832.88,
+   "text": "to compare some of these predictions,"
+  },
+  {
+   "from": 832.88,
+   "to": 834.68,
+   "text": "and this can take people even hours"
+  },
+  {
+   "from": 834.68,
+   "to": 838.36,
+   "text": "for single prompt completion pairs."
+  },
+  {
+   "from": 838.36,
+   "to": 840.34,
+   "text": "But let's say we decided that one of these"
+  },
+  {
+   "from": 840.34,
+   "to": 841.94,
+   "text": "is much better than the others and so on."
+  },
+  {
+   "from": 841.94,
+   "to": 843.48,
+   "text": "So we ranked them."
+  },
+  {
+   "from": 843.48,
+   "to": 844.84,
+   "text": "Then we can follow that with something"
+  },
+  {
+   "from": 844.84,
+   "to": 847.38,
+   "text": "that looks very much kind of like a binary classification"
+  },
+  {
+   "from": 847.38,
+   "to": 850.4,
+   "text": "on all the possible pairs between these completions."
+  },
+  {
+   "from": 850.4,
+   "to": 853.44,
+   "text": "So what we do now is we lay out our prompt in rows,"
+  },
+  {
+   "from": 853.44,
+   "to": 856.2,
+   "text": "and the prompts is identical across all three rows here."
+  },
+  {
+   "from": 856.2,
+   "to": 857.6,
+   "text": "So it's all the same prompt,"
+  },
+  {
+   "from": 857.6,
+   "to": 859.38,
+   "text": "but the completion is very,"
+  },
+  {
+   "from": 859.38,
+   "to": 862.2,
+   "text": "and so the yellow tokens are coming from the SFD model."
+  },
+  {
+   "from": 862.2,
+   "to": 865.44,
+   "text": "Then what we do is we append another special reward"
+  },
+  {
+   "from": 865.44,
+   "to": 867.4,
+   "text": "readout token at the end,"
+  },
+  {
+   "from": 867.4,
+   "to": 869.92,
+   "text": "And we basically only supervise the transformer"
+  },
+  {
+   "from": 869.92,
+   "to": 871.88,
+   "text": "at this single green token."
+  },
+  {
+   "from": 871.88,
+   "to": 874.4,
+   "text": "And the transformer will predict some reward"
+  },
+  {
+   "from": 874.4,
+   "to": 878.44,
+   "text": "for how good that completion is for that prompt."
+  },
+  {
+   "from": 878.44,
+   "to": 880.04,
+   "text": "And so basically it makes a guess"
+  },
+  {
+   "from": 880.04,
+   "to": 882.28,
+   "text": "about the quality of each completion."
+  },
+  {
+   "from": 882.28,
+   "to": 884.92,
+   "text": "And then once it makes a guess for every one of them,"
+  },
+  {
+   "from": 884.92,
+   "to": 886.16,
+   "text": "we also have the ground truth,"
+  },
+  {
+   "from": 886.16,
+   "to": 888.0,
+   "text": "which is telling us the ranking of them."
+  },
+  {
+   "from": 888.0,
+   "to": 890.28,
+   "text": "And so we can actually enforce that some of these"
+  },
+  {
+   "from": 890.28,
+   "to": 892.4,
+   "text": "numbers should be much higher than others and so on."
+  },
+  {
+   "from": 892.4,
+   "to": 894.0,
+   "text": "We formulate this into a loss function"
+  },
+  {
+   "from": 894.0,
+   "to": 896.52,
+   "text": "and we train our model to make reward predictions"
+  },
+  {
+   "from": 896.52,
+   "to": 898.36,
+   "text": "that are consistent with the ground truth"
+  },
+  {
+   "from": 898.36,
+   "to": 901.44,
+   "text": "coming from the comparisons from all these contractors."
+  },
+  {
+   "from": 901.44,
+   "to": 902.96,
+   "text": "So that's how we train our reward model."
+  },
+  {
+   "from": 902.96,
+   "to": 904.04,
+   "text": "And that allows us to score"
+  },
+  {
+   "from": 904.04,
+   "to": 906.04,
+   "text": "how good a completion is for a prompt."
+  },
+  {
+   "from": 907.6,
+   "to": 909.44,
+   "text": "Once we have a reward model,"
+  },
+  {
+   "from": 909.44,
+   "to": 912.28,
+   "text": "we can't deploy this because this is not very useful"
+  },
+  {
+   "from": 912.28,
+   "to": 913.52,
+   "text": "as an assistant by itself,"
+  },
+  {
+   "from": 913.52,
+   "to": 916.04,
+   "text": "but it's very useful for the reinforcement learning stage"
+  },
+  {
+   "from": 916.04,
+   "to": 917.28,
+   "text": "that follows now."
+  },
+  {
+   "from": 917.28,
+   "to": 918.56,
+   "text": "Because we have a reward model,"
+  },
+  {
+   "from": 918.56,
+   "to": 921.48,
+   "text": "we can score the quality of any arbitrary completion"
+  },
+  {
+   "from": 921.48,
+   "to": 923.16,
+   "text": "for any given prompt."
+  },
+  {
+   "from": 923.16,
+   "to": 924.92,
+   "text": "So what we do during reinforcement learning"
+  },
+  {
+   "from": 924.92,
+   "to": 927.9,
+   "text": "is we basically get, again, a large collection of prompts,"
+  },
+  {
+   "from": 927.9,
+   "to": 929.28,
+   "text": "and now we do reinforcement learning"
+  },
+  {
+   "from": 929.28,
+   "to": 930.88,
+   "text": "with respect to the reward model."
+  },
+  {
+   "from": 930.88,
+   "to": 932.84,
+   "text": "So here's what that looks like."
+  },
+  {
+   "from": 932.84,
+   "to": 936.28,
+   "text": "We take a single prompt, we lay it out in rows,"
+  },
+  {
+   "from": 936.28,
+   "to": 937.84,
+   "text": "and now we use the SFD model,"
+  },
+  {
+   "from": 937.84,
+   "to": 939.6,
+   "text": "we use basically the model we'd like to train,"
+  },
+  {
+   "from": 939.6,
+   "to": 941.72,
+   "text": "which is initialized at SFD model"
+  },
+  {
+   "from": 941.72,
+   "to": 943.76,
+   "text": "to create some completions in yellow."
+  },
+  {
+   "from": 943.76,
+   "to": 946.28,
+   "text": "And then we append the reward token again,"
+  },
+  {
+   "from": 946.28,
+   "to": 948.0,
+   "text": "and we read off the reward,"
+  },
+  {
+   "from": 948.0,
+   "to": 949.2,
+   "text": "according to the reward model,"
+  },
+  {
+   "from": 949.2,
+   "to": 950.6,
+   "text": "which is now kept fixed."
+  },
+  {
+   "from": 950.6,
+   "to": 952.32,
+   "text": "It doesn't change anymore."
+  },
+  {
+   "from": 952.32,
+   "to": 954.04,
+   "text": "And now the reward model tells us"
+  },
+  {
+   "from": 954.04,
+   "to": 957.36,
+   "text": "a quality of every single completion for these prompts."
+  },
+  {
+   "from": 957.36,
+   "to": 959.52,
+   "text": "And so what we can do is we can now just basically apply"
+  },
+  {
+   "from": 959.52,
+   "to": 961.92,
+   "text": "the same language modeling loss function,"
+  },
+  {
+   "from": 961.92,
+   "to": 964.88,
+   "text": "but we're currently training on the yellow tokens,"
+  },
+  {
+   "from": 964.88,
+   "to": 968.92,
+   "text": "and we are weighing the language modeling objective"
+  },
+  {
+   "from": 968.92,
+   "to": 971.32,
+   "text": "by the rewards indicated by the reward model."
+  },
+  {
+   "from": 971.32,
+   "to": 973.24,
+   "text": "So as an example, in a first row,"
+  },
+  {
+   "from": 973.24,
+   "to": 975.56,
+   "text": "the reward model said that this is"
+  },
+  {
+   "from": 975.56,
+   "to": 977.36,
+   "text": "a fairly high scoring completion,"
+  },
+  {
+   "from": 977.36,
+   "to": 980.04,
+   "text": "and so all of the tokens that we happened to sample"
+  },
+  {
+   "from": 980.04,
+   "to": 982.36,
+   "text": "on the first row are going to get reinforced,"
+  },
+  {
+   "from": 982.36,
+   "to": 985.64,
+   "text": "and they're going to get higher probabilities for the future."
+  },
+  {
+   "from": 985.64,
+   "to": 988.04,
+   "text": "Conversely, on the second row, the reward model really did not"
+  },
+  {
+   "from": 988.04,
+   "to": 990.04,
+   "text": "like this completion, negative 1.2."
+  },
+  {
+   "from": 990.04,
+   "to": 992.04,
+   "text": "And so therefore, every single token"
+  },
+  {
+   "from": 992.04,
+   "to": 993.64,
+   "text": "that we sampled in that second row"
+  },
+  {
+   "from": 993.64,
+   "to": 996.32,
+   "text": "is going to get a slightly higher probability for the future."
+  },
+  {
+   "from": 996.32,
+   "to": 998.32,
+   "text": "And we do this over and over on many prompts,"
+  },
+  {
+   "from": 998.32,
+   "to": 999.4,
+   "text": "on many batches."
+  },
+  {
+   "from": 999.4,
+   "to": 1002.48,
+   "text": "And basically, we get a policy which creates yellow tokens"
+  },
+  {
+   "from": 1002.48,
+   "to": 1006.16,
+   "text": "here, and basically all of the completions here"
+  },
+  {
+   "from": 1006.16,
+   "to": 1008.64,
+   "text": "will score high according to the reward model that we"
+  },
+  {
+   "from": 1008.64,
+   "to": 1011.52,
+   "text": "trained in the previous stage."
+  },
+  {
+   "from": 1011.52,
+   "to": 1014.96,
+   "text": "So that's how we train, that's what the RLHF pipeline is."
+  },
+  {
+   "from": 1015.84,
+   "to": 1017.84,
+   "text": "Now, and then at the end, you get a model"
+  },
+  {
+   "from": 1017.84,
+   "to": 1018.68,
+   "text": "that you could deploy."
+  },
+  {
+   "from": 1018.68,
+   "to": 1022.68,
+   "text": "And so as an example, ChatGPT is an RLHF model."
+  },
+  {
+   "from": 1022.68,
+   "to": 1024.56,
+   "text": "But some other models that you might come across,"
+  },
+  {
+   "from": 1024.56,
+   "to": 1026.76,
+   "text": "like for example, the Kuna 13b and so on,"
+  },
+  {
+   "from": 1026.76,
+   "to": 1028.24,
+   "text": "these are SFD models."
+  },
+  {
+   "from": 1028.24,
+   "to": 1031.8,
+   "text": "So we have base models, SFD models, and RLHF models,"
+  },
+  {
+   "from": 1031.8,
+   "to": 1034.92,
+   "text": "and that's kind of like the state of things there."
+  },
+  {
+   "from": 1034.92,
+   "to": 1037.04,
+   "text": "Now, why would you want to do RLHF?"
+  },
+  {
+   "from": 1037.04,
+   "to": 1039.8,
+   "text": "So one answer that is kind of not that exciting"
+  },
+  {
+   "from": 1039.8,
+   "to": 1040.96,
+   "text": "is that it just works better."
+  },
+  {
+   "from": 1040.96,
+   "to": 1043.04,
+   "text": "So this comes from the InstructGPT paper."
+  },
+  {
+   "from": 1043.04,
+   "to": 1045.8,
+   "text": "According to these experiments a while ago now,"
+  },
+  {
+   "from": 1045.8,
+   "to": 1048.12,
+   "text": "these PPO models are RLHF,"
+  },
+  {
+   "from": 1048.12,
+   "to": 1050.44,
+   "text": "and we see that they are basically just preferred"
+  },
+  {
+   "from": 1050.44,
+   "to": 1053.76,
+   "text": "in a lot of comparisons when we give them to humans."
+  },
+  {
+   "from": 1053.76,
+   "to": 1056.62,
+   "text": "So humans just prefer basically tokens"
+  },
+  {
+   "from": 1056.62,
+   "to": 1059.48,
+   "text": "that come from RLHF models compared to SFT models,"
+  },
+  {
+   "from": 1059.48,
+   "to": 1062.28,
+   "text": "compared to base model that is prompted to be an assistant."
+  },
+  {
+   "from": 1062.28,
+   "to": 1064.0,
+   "text": "And so it just works better."
+  },
+  {
+   "from": 1064.0,
+   "to": 1066.24,
+   "text": "But you might ask why?"
+  },
+  {
+   "from": 1066.24,
+   "to": 1067.32,
+   "text": "Why does it work better?"
+  },
+  {
+   "from": 1067.32,
+   "to": 1068.76,
+   "text": "And I don't think that there's a single,"
+  },
+  {
+   "from": 1068.76,
+   "to": 1070.36,
+   "text": "like amazing answer that the community"
+  },
+  {
+   "from": 1070.36,
+   "to": 1071.96,
+   "text": "has really agreed on."
+  },
+  {
+   "from": 1071.96,
+   "to": 1075.72,
+   "text": "But I will just offer one reason potentially."
+  },
+  {
+   "from": 1075.72,
+   "to": 1077.4,
+   "text": "And it has to do with the asymmetry"
+  },
+  {
+   "from": 1077.4,
+   "to": 1079.36,
+   "text": "between how easy computationally it"
+  },
+  {
+   "from": 1079.36,
+   "to": 1082.36,
+   "text": "is to compare versus generate."
+  },
+  {
+   "from": 1082.36,
+   "to": 1085.0,
+   "text": "So let's take an example of generating a haiku."
+  },
+  {
+   "from": 1085.0,
+   "to": 1088.2,
+   "text": "Suppose I ask a model to write a haiku about paper clips."
+  },
+  {
+   "from": 1088.2,
+   "to": 1090.88,
+   "text": "If you're a contractor trying to give train data,"
+  },
+  {
+   "from": 1090.88,
+   "to": 1092.92,
+   "text": "then imagine being a contractor collecting basically"
+  },
+  {
+   "from": 1092.92,
+   "to": 1094.4,
+   "text": "data for the SFD stage."
+  },
+  {
+   "from": 1094.4,
+   "to": 1096.16,
+   "text": "How are you supposed to create a nice haiku"
+  },
+  {
+   "from": 1096.16,
+   "to": 1096.88,
+   "text": "for a paper clip?"
+  },
+  {
+   "from": 1096.88,
+   "to": 1098.88,
+   "text": "You might just not be very good at that."
+  },
+  {
+   "from": 1098.88,
+   "to": 1100.8,
+   "text": "But if I give you a few examples of haikus,"
+  },
+  {
+   "from": 1100.8,
+   "to": 1102.92,
+   "text": "you might be able to appreciate some of these haikus"
+  },
+  {
+   "from": 1102.92,
+   "to": 1104.28,
+   "text": "a lot more than others."
+  },
+  {
+   "from": 1104.28,
+   "to": 1105.96,
+   "text": "And so judging which one of these is good"
+  },
+  {
+   "from": 1105.96,
+   "to": 1107.56,
+   "text": "is much easier task."
+  },
+  {
+   "from": 1107.56,
+   "to": 1109.76,
+   "text": "And so basically this asymmetry makes it"
+  },
+  {
+   "from": 1109.76,
+   "to": 1112.56,
+   "text": "so that comparisons are a better way"
+  },
+  {
+   "from": 1112.56,
+   "to": 1114.88,
+   "text": "to potentially leverage yourself as a human"
+  },
+  {
+   "from": 1114.88,
+   "to": 1118.16,
+   "text": "and your judgment to create a slightly better model."
+  },
+  {
+   "from": 1118.16,
+   "to": 1121.44,
+   "text": "Now our LHF models are not strictly"
+  },
+  {
+   "from": 1121.44,
+   "to": 1123.76,
+   "text": "an improvement on the base models in some cases."
+  },
+  {
+   "from": 1123.76,
+   "to": 1125.24,
+   "text": "So in particular we'd notice for example"
+  },
+  {
+   "from": 1125.24,
+   "to": 1126.96,
+   "text": "that they lose some entropy."
+  },
+  {
+   "from": 1126.96,
+   "to": 1129.84,
+   "text": "So that means that they give more PT results."
+  },
+  {
+   "from": 1129.84,
+   "to": 1132.72,
+   "text": "They can output lower variations,"
+  },
+  {
+   "from": 1132.72,
+   "to": 1135.12,
+   "text": "like they can output samples with lower variation"
+  },
+  {
+   "from": 1135.12,
+   "to": 1136.12,
+   "text": "than the base model."
+  },
+  {
+   "from": 1136.12,
+   "to": 1137.44,
+   "text": "So base model has lots of entropy"
+  },
+  {
+   "from": 1137.44,
+   "to": 1140.24,
+   "text": "and will give lots of diverse outputs."
+  },
+  {
+   "from": 1140.24,
+   "to": 1142.96,
+   "text": "So for example, one kind of place"
+  },
+  {
+   "from": 1142.96,
+   "to": 1145.24,
+   "text": "where I still prefer to use a base model"
+  },
+  {
+   "from": 1145.24,
+   "to": 1150.24,
+   "text": "is in a setup where you basically have n things"
+  },
+  {
+   "from": 1150.88,
+   "to": 1153.76,
+   "text": "and you want to generate more things like it."
+  },
+  {
+   "from": 1153.76,
+   "to": 1156.48,
+   "text": "And so here is an example that I just cooked up."
+  },
+  {
+   "from": 1156.48,
+   "to": 1158.88,
+   "text": "I want to generate cool Pokemon names."
+  },
+  {
+   "from": 1158.88,
+   "to": 1162.92,
+   "text": "I gave it seven Pokemon names, and I asked the base model to complete the document,"
+  },
+  {
+   "from": 1162.92,
+   "to": 1164.96,
+   "text": "and it gave me a lot more Pokemon names."
+  },
+  {
+   "from": 1164.96,
+   "to": 1165.96,
+   "text": "These are fictitious."
+  },
+  {
+   "from": 1165.96,
+   "to": 1167.04,
+   "text": "I tried to look them up."
+  },
+  {
+   "from": 1167.04,
+   "to": 1170.84,
+   "text": "I don't believe they're actual Pokemons, and this is the kind of task that I think"
+  },
+  {
+   "from": 1170.84,
+   "to": 1173.68,
+   "text": "base model would be good at, because it still has lots of entropy, and will give"
+  },
+  {
+   "from": 1173.68,
+   "to": 1180.7,
+   "text": "you lots of diverse, cool kind of more things that look like whatever you give it before."
+  },
+  {
+   "from": 1180.7,
+   "to": 1184.16,
+   "text": "So this is what, this is the number, having said all that, these are kind of like"
+  },
+  {
+   "from": 1184.16,
+   "to": 1187.76,
+   "text": "the Assistant models that are probably available to you at this point."
+  },
+  {
+   "from": 1187.76,
+   "to": 1191.92,
+   "text": "There's a team at Berkeley that ranked a lot of the available assistant models and gave"
+  },
+  {
+   "from": 1191.92,
+   "to": 1193.56,
+   "text": "them basically ELO ratings."
+  },
+  {
+   "from": 1193.56,
+   "to": 1197.74,
+   "text": "So currently some of the best models, of course, are GPT4 by far, I would say, followed by"
+  },
+  {
+   "from": 1197.74,
+   "to": 1202.4,
+   "text": "Claude, GPT3.5, and then a number of models, some of these might be available as weights"
+  },
+  {
+   "from": 1202.4,
+   "to": 1205.1,
+   "text": "like the Kuna, Koala, et cetera."
+  },
+  {
+   "from": 1205.1,
+   "to": 1210.64,
+   "text": "And the first three rows here are all RLHF models, and all of the other models"
+  },
+  {
+   "from": 1210.64,
+   "to": 1215.92,
+   "text": "to my knowledge are SFD models, I believe."
+  },
+  {
+   "from": 1215.92,
+   "to": 1216.92,
+   "text": "Okay."
+  },
+  {
+   "from": 1216.92,
+   "to": 1219.56,
+   "text": "So that's how we train these models on a high level."
+  },
+  {
+   "from": 1219.56,
+   "to": 1225.04,
+   "text": "Now I'm going to switch gears, and let's look at how we can best apply a GPT-assistant model"
+  },
+  {
+   "from": 1225.04,
+   "to": 1226.48,
+   "text": "to your problems."
+  },
+  {
+   "from": 1226.48,
+   "to": 1230.12,
+   "text": "Now I would like to work in a setting of a concrete example."
+  },
+  {
+   "from": 1230.12,
+   "to": 1233.32,
+   "text": "So let's work with a concrete example here."
+  },
+  {
+   "from": 1233.32,
+   "to": 1236.76,
+   "text": "Let's say that you are working on an article or a blog post, and you're going to write"
+  },
+  {
+   "from": 1236.76,
+   "to": 1239.16,
+   "text": "this sentence at the end."
+  },
+  {
+   "from": 1239.16,
+   "to": 1241.28,
+   "text": "California's population is 53 times that of Alaska."
+  },
+  {
+   "from": 1241.28,
+   "to": 1245.48,
+   "text": "So for some reason, you want to compare the populations of these two states."
+  },
+  {
+   "from": 1245.48,
+   "to": 1250.54,
+   "text": "Think about the rich internal monologue and tool use and how much work actually goes computationally"
+  },
+  {
+   "from": 1250.54,
+   "to": 1253.54,
+   "text": "in your brain to generate this one final sentence."
+  },
+  {
+   "from": 1253.54,
+   "to": 1256.22,
+   "text": "So here's maybe what that could look like in your brain."
+  },
+  {
+   "from": 1256.22,
+   "to": 1262.06,
+   "text": "For this next step, let me compare these two populations."
+  },
+  {
+   "from": 1262.06,
+   "to": 1265.42,
+   "text": "First I'm going to obviously need to get both of these populations."
+  },
+  {
+   "from": 1265.42,
+   "to": 1269.26,
+   "text": "Now I know that I probably don't know these populations off the top of my head."
+  },
+  {
+   "from": 1269.26,
+   "to": 1273.46,
+   "text": "So I'm kind of like aware of what I know or don't know of my self-knowledge."
+  },
+  {
+   "from": 1273.46,
+   "to": 1278.34,
+   "text": "So I go, I do some tool use, and I go to Wikipedia, and I look up California's population"
+  },
+  {
+   "from": 1278.34,
+   "to": 1280.38,
+   "text": "and Alaska's population."
+  },
+  {
+   "from": 1280.38,
+   "to": 1285.62,
+   "text": "Now I know that I should divide the two, but again, I know that dividing 39.2 by 0.74 is"
+  },
+  {
+   "from": 1285.62,
+   "to": 1287.18,
+   "text": "very unlikely to succeed."
+  },
+  {
+   "from": 1287.18,
+   "to": 1289.86,
+   "text": "That's not the kind of thing that I can do in my head."
+  },
+  {
+   "from": 1289.86,
+   "to": 1292.62,
+   "text": "And so therefore, I'm going to rely on a calculator."
+  },
+  {
+   "from": 1292.62,
+   "to": 1295.82,
+   "text": "So I'm going to use a calculator, punch it in, and see that the output is roughly"
+  },
+  {
+   "from": 1295.82,
+   "to": 1297.46,
+   "text": "53."
+  },
+  {
+   "from": 1297.46,
+   "to": 1300.94,
+   "text": "And then maybe I do some reflection and sanity checks in my brain."
+  },
+  {
+   "from": 1300.94,
+   "to": 1302.5,
+   "text": "So does 53 make sense?"
+  },
+  {
+   "from": 1302.5,
+   "to": 1306.82,
+   "text": "Well, that's quite a large fraction, but California has the most popular state, so maybe that"
+  },
+  {
+   "from": 1306.82,
+   "to": 1308.3,
+   "text": "looks okay."
+  },
+  {
+   "from": 1308.3,
+   "to": 1311.58,
+   "text": "So then I have all the information I might need, and now I get to the sort of creative"
+  },
+  {
+   "from": 1311.58,
+   "to": 1313.02,
+   "text": "portion of writing."
+  },
+  {
+   "from": 1313.02,
+   "to": 1317.5,
+   "text": "So I might start to write something like California has 53x times greater, and then"
+  },
+  {
+   "from": 1317.5,
+   "to": 1320.46,
+   "text": "I think to myself, that's actually like really awkward phrasing."
+  },
+  {
+   "from": 1320.46,
+   "to": 1323.7,
+   "text": "So let me actually delete that, and let me try again."
+  },
+  {
+   "from": 1323.7,
+   "to": 1328.42,
+   "text": "And so as I'm writing, I have this separate process almost inspecting what I'm writing"
+  },
+  {
+   "from": 1328.42,
+   "to": 1331.22,
+   "text": "and judging whether it looks good or not."
+  },
+  {
+   "from": 1331.22,
+   "to": 1334.98,
+   "text": "And then maybe I delete, and maybe I reframe it, and then maybe I'm happy with what comes"
+  },
+  {
+   "from": 1334.98,
+   "to": 1335.98,
+   "text": "out."
+  },
+  {
+   "from": 1335.98,
+   "to": 1340.22,
+   "text": "So basically, long story short, a ton happens under the hood in terms of your internal monologue"
+  },
+  {
+   "from": 1340.22,
+   "to": 1342.22,
+   "text": "when you create sentences like this."
+  },
+  {
+   "from": 1342.22,
+   "to": 1347.58,
+   "text": "But what does a sentence like this look like when we are training a GPT on it?"
+  },
+  {
+   "from": 1347.58,
+   "to": 1350.82,
+   "text": "From GPT's perspective, this is just a sequence of tokens."
+  },
+  {
+   "from": 1350.82,
+   "to": 1355.46,
+   "text": "So a GPT, when it's reading or generating these tokens, it just goes chunk, chunk,"
+  },
+  {
+   "from": 1355.46,
+   "to": 1356.46,
+   "text": "chunk, chunk, chunk."
+  },
+  {
+   "from": 1356.46,
+   "to": 1360.7,
+   "text": "And each chunk is roughly the same amount of computational work for each token."
+  },
+  {
+   "from": 1360.7,
+   "to": 1365.62,
+   "text": "And these transformers are not very shallow networks, they have about 80 layers of reasoning,"
+  },
+  {
+   "from": 1365.62,
+   "to": 1367.78,
+   "text": "but 80 is still not like too much."
+  },
+  {
+   "from": 1367.78,
+   "to": 1373.06,
+   "text": "And so this transformer is going to do its best to imitate, but of course the process"
+  },
+  {
+   "from": 1373.06,
+   "to": 1376.78,
+   "text": "here looks very, very different from the process that you took."
+  },
+  {
+   "from": 1376.78,
+   "to": 1380.5,
+   "text": "So in particular, in our final artifacts, in the data set that we create and then"
+  },
+  {
+   "from": 1380.5,
+   "to": 1386.3,
+   "text": "eventually feed to LLMs, all of that internal dialogue is completely stripped."
+  },
+  {
+   "from": 1386.3,
+   "to": 1390.46,
+   "text": "And unlike you, the GPT will look at every single token and spend the same amount of"
+  },
+  {
+   "from": 1390.46,
+   "to": 1392.34,
+   "text": "compute on every one of them."
+  },
+  {
+   "from": 1392.34,
+   "to": 1397.98,
+   "text": "And so you can't expect it to actually like, well, you can't expect it to do too much work"
+  },
+  {
+   "from": 1397.98,
+   "to": 1399.58,
+   "text": "per token."
+  },
+  {
+   "from": 1399.58,
+   "to": 1403.98,
+   "text": "So and also in particular, basically these transformers are just like token simulators."
+  },
+  {
+   "from": 1403.98,
+   "to": 1408.18,
+   "text": "So they don't know what they don't know, like they just imitate the next token."
+  },
+  {
+   "from": 1408.18,
+   "to": 1409.86,
+   "text": "They don't know what they're good at or not good at."
+  },
+  {
+   "from": 1409.86,
+   "to": 1412.5,
+   "text": "They just tried their best to imitate the next token."
+  },
+  {
+   "from": 1412.5,
+   "to": 1414.22,
+   "text": "They don't reflect in the loop."
+  },
+  {
+   "from": 1414.22,
+   "to": 1415.62,
+   "text": "They don't sanity check anything."
+  },
+  {
+   "from": 1415.62,
+   "to": 1418.1,
+   "text": "they don't correct their mistakes along the way by default."
+  },
+  {
+   "from": 1418.1,
+   "to": 1421.08,
+   "text": "They just sample token sequences."
+  },
+  {
+   "from": 1421.08,
+   "to": 1423.14,
+   "text": "They don't have separate inner monologue streams"
+  },
+  {
+   "from": 1423.14,
+   "to": 1423.98,
+   "text": "in their head, right?"
+  },
+  {
+   "from": 1423.98,
+   "to": 1425.74,
+   "text": "They're evaluating what's happening."
+  },
+  {
+   "from": 1425.74,
+   "to": 1428.54,
+   "text": "Now, they do have some sort of cognitive advantages,"
+  },
+  {
+   "from": 1428.54,
+   "to": 1430.86,
+   "text": "I would say, and that is that they do actually"
+  },
+  {
+   "from": 1430.86,
+   "to": 1432.86,
+   "text": "have very large fact-based knowledge"
+  },
+  {
+   "from": 1432.86,
+   "to": 1434.66,
+   "text": "across a vast number of areas"
+  },
+  {
+   "from": 1434.66,
+   "to": 1437.14,
+   "text": "because they have, say, several 10 billion parameters."
+  },
+  {
+   "from": 1437.14,
+   "to": 1440.1,
+   "text": "So that's a lot of storage for a lot of facts."
+  },
+  {
+   "from": 1440.1,
+   "to": 1443.22,
+   "text": "But, and they also, I think, have a relatively large"
+  },
+  {
+   "from": 1443.22,
+   "to": 1444.82,
+   "text": "and perfect working memory."
+  },
+  {
+   "from": 1444.82,
+   "to": 1448.1,
+   "text": "So whatever fits into the context window"
+  },
+  {
+   "from": 1448.1,
+   "to": 1450.3,
+   "text": "is immediately available to the transformer"
+  },
+  {
+   "from": 1450.3,
+   "to": 1452.62,
+   "text": "through its internal self-attention mechanism."
+  },
+  {
+   "from": 1452.62,
+   "to": 1455.02,
+   "text": "And so it's kind of like perfect memory,"
+  },
+  {
+   "from": 1455.02,
+   "to": 1456.58,
+   "text": "but it's got a finite size."
+  },
+  {
+   "from": 1456.58,
+   "to": 1458.7,
+   "text": "But the transformer has a very direct access to it."
+  },
+  {
+   "from": 1458.7,
+   "to": 1461.94,
+   "text": "And so it can like losslessly remember anything"
+  },
+  {
+   "from": 1461.94,
+   "to": 1464.26,
+   "text": "that is inside its context window."
+  },
+  {
+   "from": 1464.26,
+   "to": 1465.98,
+   "text": "So that's kind of how I would compare those two."
+  },
+  {
+   "from": 1465.98,
+   "to": 1467.26,
+   "text": "And the reason I bring all of this up"
+  },
+  {
+   "from": 1467.26,
+   "to": 1469.58,
+   "text": "is because I think to a large extent,"
+  },
+  {
+   "from": 1469.58,
+   "to": 1472.1,
+   "text": "prompting is just making up for this sort"
+  },
+  {
+   "from": 1472.1,
+   "to": 1477.84,
+   "text": "cognitive difference between these two kind of architectures like our brains"
+  },
+  {
+   "from": 1477.84,
+   "to": 1483.2,
+   "text": "here and LLM brains you can look at it that way almost so here's one thing that"
+  },
+  {
+   "from": 1483.2,
+   "to": 1486.68,
+   "text": "people found for example works pretty well in practice especially if your tasks"
+  },
+  {
+   "from": 1486.68,
+   "to": 1490.88,
+   "text": "require reasoning you can't expect the transformer to make two to do too much"
+  },
+  {
+   "from": 1490.88,
+   "to": 1494.28,
+   "text": "reasoning per token and so you have to really spread out the reasoning"
+  },
+  {
+   "from": 1494.28,
+   "to": 1497.2,
+   "text": "across more and more tokens so for example you can't give the"
+  },
+  {
+   "from": 1497.2,
+   "to": 1500.4,
+   "text": "transformer a very complicated question and expected to get the answer in a"
+  },
+  {
+   "from": 1500.4,
+   "to": 1504.36,
+   "text": "single token. There's just not enough time for it. These transformers need tokens to"
+  },
+  {
+   "from": 1504.36,
+   "to": 1508.52,
+   "text": "think, quote, unquote, I like to say sometimes. And so this is some of the things that work"
+  },
+  {
+   "from": 1508.52,
+   "to": 1512.28,
+   "text": "well. You may, for example, have a few shot prompt that shows the transformer that it"
+  },
+  {
+   "from": 1512.28,
+   "to": 1517.28,
+   "text": "should, like, show its work when it's answering the question. And if you give a few examples,"
+  },
+  {
+   "from": 1517.28,
+   "to": 1522.84,
+   "text": "the transformer will imitate that template, and it will just end up working out better"
+  },
+  {
+   "from": 1522.84,
+   "to": 1526.72,
+   "text": "in terms of its evaluation. Additionally, you can elicit this kind of behavior from"
+  },
+  {
+   "from": 1526.72,
+   "to": 1531.28,
+   "text": "the transformer by saying let's think step by step because this conditioned the transformer"
+  },
+  {
+   "from": 1531.28,
+   "to": 1533.88,
+   "text": "into sort of like showing its work."
+  },
+  {
+   "from": 1533.88,
+   "to": 1538.6,
+   "text": "And because it kind of snaps into a mode of showing its work, it's going to do less computational"
+  },
+  {
+   "from": 1538.6,
+   "to": 1544.56,
+   "text": "work per token, and so it's more likely to succeed as a result because it's making slower"
+  },
+  {
+   "from": 1544.56,
+   "to": 1546.76,
+   "text": "reasoning over time."
+  },
+  {
+   "from": 1546.76,
+   "to": 1547.76,
+   "text": "Here's another example."
+  },
+  {
+   "from": 1547.76,
+   "to": 1550.08,
+   "text": "This one is called self-consistency."
+  },
+  {
+   "from": 1550.08,
+   "to": 1554.16,
+   "text": "We saw that we had the ability to start writing, and then if it didn't work out,"
+  },
+  {
+   "from": 1554.16,
+   "to": 1560.76,
+   "text": "I can try again, and I can try multiple times and maybe select the one that worked best."
+  },
+  {
+   "from": 1560.76,
+   "to": 1564.72,
+   "text": "So in these kinds of approaches, you may sample not just once, but you may sample multiple"
+  },
+  {
+   "from": 1564.72,
+   "to": 1569.4,
+   "text": "times and then have some process for finding the ones that are good and then keeping just"
+  },
+  {
+   "from": 1569.4,
+   "to": 1572.2,
+   "text": "those samples or doing a majority vote or something like that."
+  },
+  {
+   "from": 1572.2,
+   "to": 1576.24,
+   "text": "So basically these transformers in the process, as they predict the next token,"
+  },
+  {
+   "from": 1576.24,
+   "to": 1580.4,
+   "text": "just like you, they can get unlucky and they could sample a not a very good token"
+  },
+  {
+   "from": 1580.4,
+   "to": 1582.68,
+   "text": "and they can go down sort of like a blind alley"
+  },
+  {
+   "from": 1582.68,
+   "to": 1584.0,
+   "text": "in terms of reasoning."
+  },
+  {
+   "from": 1584.0,
+   "to": 1587.32,
+   "text": "And so, unlike you, they cannot recover from that."
+  },
+  {
+   "from": 1587.32,
+   "to": 1589.56,
+   "text": "They are stuck with every single token they sample,"
+  },
+  {
+   "from": 1589.56,
+   "to": 1591.04,
+   "text": "and so they will continue the sequence"
+  },
+  {
+   "from": 1591.04,
+   "to": 1593.12,
+   "text": "even if they even know that this sequence"
+  },
+  {
+   "from": 1593.12,
+   "to": 1594.24,
+   "text": "is not gonna work out."
+  },
+  {
+   "from": 1594.24,
+   "to": 1597.0,
+   "text": "So give them the ability to look back, inspect,"
+  },
+  {
+   "from": 1597.0,
+   "to": 1600.28,
+   "text": "or try to basically sample around it."
+  },
+  {
+   "from": 1601.32,
+   "to": 1602.48,
+   "text": "Here's one technique also."
+  },
+  {
+   "from": 1602.48,
+   "to": 1604.64,
+   "text": "You could, it turns out that actually,"
+  },
+  {
+   "from": 1604.64,
+   "to": 1607.48,
+   "text": "LLMs, like they know when they've screwed up."
+  },
+  {
+   "from": 1607.48,
+   "to": 1609.36,
+   "text": "So as an example."
+  },
+  {
+   "from": 1609.36,
+   "to": 1613.6,
+   "text": "Say you ask the model to generate a poem that does not rhyme."
+  },
+  {
+   "from": 1613.6,
+   "to": 1616.08,
+   "text": "And it might give you a poem, but it actually rhymes."
+  },
+  {
+   "from": 1616.08,
+   "to": 1617.96,
+   "text": "But it turns out that especially for the bigger models"
+  },
+  {
+   "from": 1617.96,
+   "to": 1621.24,
+   "text": "like GPT-4, you can just ask it, did you meet the assignment?"
+  },
+  {
+   "from": 1621.24,
+   "to": 1623.48,
+   "text": "And actually, GPT-4 knows very well"
+  },
+  {
+   "from": 1623.48,
+   "to": 1624.92,
+   "text": "that it did not meet the assignment."
+  },
+  {
+   "from": 1624.92,
+   "to": 1626.96,
+   "text": "It just kind of got unlucky in its sampling."
+  },
+  {
+   "from": 1626.96,
+   "to": 1628.8,
+   "text": "And so it will tell you, no, I didn't actually"
+  },
+  {
+   "from": 1628.8,
+   "to": 1629.8,
+   "text": "meet the assignment."
+  },
+  {
+   "from": 1629.8,
+   "to": 1631.08,
+   "text": "Let me try again."
+  },
+  {
+   "from": 1631.08,
+   "to": 1635.84,
+   "text": "But without you prompting it, it doesn't know"
+  },
+  {
+   "from": 1635.84,
+   "to": 1638.04,
+   "text": "to revisit and so on."
+  },
+  {
+   "from": 1638.04,
+   "to": 1640.08,
+   "text": "So you have to make up for that in your prompts."
+  },
+  {
+   "from": 1640.08,
+   "to": 1642.08,
+   "text": "You have to get it to check."
+  },
+  {
+   "from": 1642.08,
+   "to": 1643.92,
+   "text": "If you don't ask it to check, it's not going to check by"
+  },
+  {
+   "from": 1643.92,
+   "to": 1649.2,
+   "text": "itself, it's just a token simulator."
+  },
+  {
+   "from": 1649.2,
+   "to": 1651.44,
+   "text": "I think more generally a lot of these techniques fall into"
+  },
+  {
+   "from": 1651.44,
+   "to": 1654.68,
+   "text": "the bucket of what I would say, recreating our system 2."
+  },
+  {
+   "from": 1654.68,
+   "to": 1656.68,
+   "text": "So you might be familiar with the system 1, system 2"
+  },
+  {
+   "from": 1656.68,
+   "to": 1658.0,
+   "text": "thinking for humans."
+  },
+  {
+   "from": 1658.0,
+   "to": 1660.2,
+   "text": "System 1 is a fast, automatic process."
+  },
+  {
+   "from": 1660.2,
+   "to": 1662.12,
+   "text": "And I think kind of corresponds to like an LLM"
+  },
+  {
+   "from": 1662.12,
+   "to": 1663.92,
+   "text": "just sampling tokens."
+  },
+  {
+   "from": 1663.92,
+   "to": 1667.36,
+   "text": "And system 2 is the slower, deliberate, planning sort of"
+  },
+  {
+   "from": 1667.36,
+   "to": 1669.36,
+   "text": "part of your brain."
+  },
+  {
+   "from": 1669.36,
+   "to": 1671.96,
+   "text": "And so this is a paper actually from just last week"
+  },
+  {
+   "from": 1671.96,
+   "to": 1673.84,
+   "text": "because this space is pretty quickly evolving."
+  },
+  {
+   "from": 1673.84,
+   "to": 1675.44,
+   "text": "It's called Tree of Thought."
+  },
+  {
+   "from": 1675.44,
+   "to": 1678.36,
+   "text": "And in Tree of Thought, the authors of this paper"
+  },
+  {
+   "from": 1678.36,
+   "to": 1680.92,
+   "text": "propose maintaining multiple completions"
+  },
+  {
+   "from": 1680.92,
+   "to": 1682.44,
+   "text": "for any given prompt."
+  },
+  {
+   "from": 1682.44,
+   "to": 1685.16,
+   "text": "And then they are also scoring them along the way"
+  },
+  {
+   "from": 1685.16,
+   "to": 1687.24,
+   "text": "and keeping the ones that are going well, if that"
+  },
+  {
+   "from": 1687.24,
+   "to": 1688.2,
+   "text": "makes sense."
+  },
+  {
+   "from": 1688.2,
+   "to": 1690.0,
+   "text": "And so a lot of people are really"
+  },
+  {
+   "from": 1690.0,
+   "to": 1693.6,
+   "text": "playing around with prompt engineering"
+  },
+  {
+   "from": 1693.6,
+   "to": 1696.68,
+   "text": "to basically bring back some of these abilities"
+  },
+  {
+   "from": 1696.68,
+   "to": 1699.88,
+   "text": "that we sort of have in our brain for LLMs."
+  },
+  {
+   "from": 1699.88,
+   "to": 1701.32,
+   "text": "Now, one thing I would like to note here"
+  },
+  {
+   "from": 1701.32,
+   "to": 1702.96,
+   "text": "is that this is not just a prompt."
+  },
+  {
+   "from": 1702.96,
+   "to": 1705.52,
+   "text": "This is actually prompts that are together"
+  },
+  {
+   "from": 1705.52,
+   "to": 1708.32,
+   "text": "used with some Python glue code because you don't,"
+  },
+  {
+   "from": 1708.32,
+   "to": 1710.12,
+   "text": "you actually have to maintain multiple prompts"
+  },
+  {
+   "from": 1710.12,
+   "to": 1712.88,
+   "text": "and you also have to do some tree search algorithm here"
+  },
+  {
+   "from": 1712.88,
+   "to": 1715.48,
+   "text": "to like figure out which prompt to expand, et cetera."
+  },
+  {
+   "from": 1715.48,
+   "to": 1717.8,
+   "text": "So it's a symbiosis of Python glue code"
+  },
+  {
+   "from": 1717.8,
+   "to": 1720.52,
+   "text": "and individual prompts that are called in a Y loop"
+  },
+  {
+   "from": 1720.52,
+   "to": 1722.52,
+   "text": "or in a bigger algorithm."
+  },
+  {
+   "from": 1722.52,
+   "to": 1724.04,
+   "text": "I also think that there's a really cool parallel"
+  },
+  {
+   "from": 1724.04,
+   "to": 1725.12,
+   "text": "here to AlphaGo."
+  },
+  {
+   "from": 1725.12,
+   "to": 1727.92,
+   "text": "AlphaGo has a policy for placing the next stone"
+  },
+  {
+   "from": 1727.92,
+   "to": 1729.08,
+   "text": "when it plays go."
+  },
+  {
+   "from": 1729.08,
+   "to": 1732.6,
+   "text": "And this policy was trained originally by imitating humans."
+  },
+  {
+   "from": 1732.6,
+   "to": 1735.16,
+   "text": "But in addition to this policy, it also does"
+  },
+  {
+   "from": 1735.16,
+   "to": 1736.68,
+   "text": "multi-carrelar tree search."
+  },
+  {
+   "from": 1736.68,
+   "to": 1738.92,
+   "text": "And basically, it will play out a number of possibilities"
+  },
+  {
+   "from": 1738.92,
+   "to": 1740.48,
+   "text": "in its head and evaluate all of them"
+  },
+  {
+   "from": 1740.48,
+   "to": 1741.96,
+   "text": "and only keep the ones that work well."
+  },
+  {
+   "from": 1741.96,
+   "to": 1745.0,
+   "text": "And so I think this is kind of an equivalent of AlphaGo"
+  },
+  {
+   "from": 1745.0,
+   "to": 1748.96,
+   "text": "but for text, if that makes sense."
+  },
+  {
+   "from": 1748.96,
+   "to": 1751.24,
+   "text": "So just like tree of thought, I think more generally"
+  },
+  {
+   "from": 1751.24,
+   "to": 1753.76,
+   "text": "people are starting to really explore"
+  },
+  {
+   "from": 1753.76,
+   "to": 1758.36,
+   "text": "more general techniques of not just the simple question answer prompts, but something that"
+  },
+  {
+   "from": 1758.36,
+   "to": 1762.2,
+   "text": "looks a lot more like Python glue code stringing together many prompts."
+  },
+  {
+   "from": 1762.2,
+   "to": 1766.92,
+   "text": "So on the right, I have an example from this paper called React, where they structure"
+  },
+  {
+   "from": 1766.92,
+   "to": 1774.4,
+   "text": "the answer to a prompt as a sequence of thought, action, observation, thought, action, observation,"
+  },
+  {
+   "from": 1774.4,
+   "to": 1778.64,
+   "text": "and it's a full rollout, kind of a thinking process to answer the query."
+  },
+  {
+   "from": 1778.64,
+   "to": 1782.52,
+   "text": "And in these actions, the model is also allowed to tool use."
+  },
+  {
+   "from": 1782.52,
+   "to": 1788.36,
+   "text": "On the left, I have an example of auto-GPT, and now auto-GPT, by the way, is a project"
+  },
+  {
+   "from": 1788.36,
+   "to": 1794.48,
+   "text": "that I think got a lot of hype recently, but I think I still find it kind of inspirationally"
+  },
+  {
+   "from": 1794.48,
+   "to": 1795.48,
+   "text": "interesting."
+  },
+  {
+   "from": 1795.48,
+   "to": 1801.16,
+   "text": "It's a project that allows an LLM to keep task list and continue to recursively break"
+  },
+  {
+   "from": 1801.16,
+   "to": 1804.96,
+   "text": "down tasks, and I don't think this currently works very well, and I would not advise"
+  },
+  {
+   "from": 1804.96,
+   "to": 1807.2,
+   "text": "people to use it in practical applications."
+  },
+  {
+   "from": 1807.2,
+   "to": 1809.84,
+   "text": "I just think it's something to generally take inspiration from in terms of where"
+  },
+  {
+   "from": 1809.84,
+   "to": 1813.24,
+   "text": "this is going, I think, over time."
+  },
+  {
+   "from": 1813.24,
+   "to": 1816.48,
+   "text": "So that's kind of like giving our model system to thinking."
+  },
+  {
+   "from": 1816.48,
+   "to": 1821.04,
+   "text": "The next thing that I find kind of interesting is this following sort of, I would say, almost"
+  },
+  {
+   "from": 1821.04,
+   "to": 1826.78,
+   "text": "psychological quirk of LLMs is that LLMs don't want to succeed."
+  },
+  {
+   "from": 1826.78,
+   "to": 1828.72,
+   "text": "They want to imitate."
+  },
+  {
+   "from": 1828.72,
+   "to": 1831.44,
+   "text": "You want to succeed, and you should ask for it."
+  },
+  {
+   "from": 1831.44,
+   "to": 1836.76,
+   "text": "So what I mean by that is when transformers are trained, they have training sets,"
+  },
+  {
+   "from": 1836.76,
+   "to": 1841.6,
+   "text": "And there can be an entire spectrum of performance qualities in their training data."
+  },
+  {
+   "from": 1841.6,
+   "to": 1844.92,
+   "text": "So for example, there could be some kind of a prompt for some physics question or something"
+  },
+  {
+   "from": 1844.92,
+   "to": 1845.92,
+   "text": "like that."
+  },
+  {
+   "from": 1845.92,
+   "to": 1848.52,
+   "text": "And there could be a student solution that is completely wrong, but there can also"
+  },
+  {
+   "from": 1848.52,
+   "to": 1851.28,
+   "text": "be an expert answer that is extremely right."
+  },
+  {
+   "from": 1851.28,
+   "to": 1855.56,
+   "text": "And transformers can't tell the difference between like low, I mean, they know about"
+  },
+  {
+   "from": 1855.56,
+   "to": 1859.64,
+   "text": "low quality solutions and high quality solutions, but by default, they want to imitate all"
+  },
+  {
+   "from": 1859.64,
+   "to": 1862.52,
+   "text": "of it because they're just trained on language modeling."
+  },
+  {
+   "from": 1862.52,
+   "to": 1866.4,
+   "text": "And so at test time, you actually have to ask for a good performance."
+  },
+  {
+   "from": 1866.4,
+   "to": 1872.16,
+   "text": "So in this example, in this paper, they tried various prompts, and let's think step-by-step"
+  },
+  {
+   "from": 1872.16,
+   "to": 1875.88,
+   "text": "was very powerful because it's sort of spread out the reasoning over many tokens."
+  },
+  {
+   "from": 1875.88,
+   "to": 1879.8,
+   "text": "But what worked even better is let's work this out in a step-by-step way to be sure we"
+  },
+  {
+   "from": 1879.8,
+   "to": 1881.08,
+   "text": "have the right answer."
+  },
+  {
+   "from": 1881.08,
+   "to": 1884.32,
+   "text": "And so it's kind of like conditioning on getting a right answer, and this actually"
+  },
+  {
+   "from": 1884.32,
+   "to": 1888.48,
+   "text": "makes the transformer work better because the transformer doesn't have to now hedge"
+  },
+  {
+   "from": 1888.48,
+   "to": 1893.08,
+   "text": "its probability mass on low-quality solutions, as ridiculous as that sounds."
+  },
+  {
+   "from": 1893.08,
+   "to": 1898.64,
+   "text": "And so basically, feel free to ask for a strong solution, say something like, you are a leading"
+  },
+  {
+   "from": 1898.64,
+   "to": 1902.32,
+   "text": "expert on this topic, pretend you have IQ 120, et cetera."
+  },
+  {
+   "from": 1902.32,
+   "to": 1906.76,
+   "text": "But don't try to ask for too much IQ, because if you ask for an IQ of like 400, you might"
+  },
+  {
+   "from": 1906.76,
+   "to": 1908.7,
+   "text": "be out of data distribution."
+  },
+  {
+   "from": 1908.7,
+   "to": 1913.02,
+   "text": "Or even worse, you could be in data distribution for some sci-fi stuff, and it will start"
+  },
+  {
+   "from": 1913.02,
+   "to": 1917.24,
+   "text": "to take on some sci-fi role-playing or something like that."
+  },
+  {
+   "from": 1917.24,
+   "to": 1923.44,
+   "text": "So you have to find the right amount of IQ, I think it's got some U-shaped curve there."
+  },
+  {
+   "from": 1923.44,
+   "to": 1928.98,
+   "text": "Next up, as we saw, when we are trying to solve problems, we know what we are good at"
+  },
+  {
+   "from": 1928.98,
+   "to": 1932.24,
+   "text": "and what we're not good at, and we lean on tools computationally."
+  },
+  {
+   "from": 1932.24,
+   "to": 1935.3,
+   "text": "You want to do the same potentially with your LLMs."
+  },
+  {
+   "from": 1935.3,
+   "to": 1942.24,
+   "text": "So in particular, we may want to give them calculators, code interpreters, and so on,"
+  },
+  {
+   "from": 1942.24,
+   "to": 1947.52,
+   "text": "the ability to do search, and there's a lot of techniques for doing that."
+  },
+  {
+   "from": 1947.52,
+   "to": 1951.52,
+   "text": "One thing to keep in mind, again, is that these transformers by default may not know"
+  },
+  {
+   "from": 1951.52,
+   "to": 1953.08,
+   "text": "what they don't know."
+  },
+  {
+   "from": 1953.08,
+   "to": 1956.8,
+   "text": "So you may even want to tell the transformer in a prompt, you are not very good at mental"
+  },
+  {
+   "from": 1956.8,
+   "to": 1957.88,
+   "text": "arithmetic."
+  },
+  {
+   "from": 1957.88,
+   "to": 1961.6,
+   "text": "Whenever you need to do very large number addition, multiplication or whatever, instead use"
+  },
+  {
+   "from": 1961.6,
+   "to": 1962.6,
+   "text": "this calculator."
+  },
+  {
+   "from": 1962.6,
+   "to": 1963.96,
+   "text": "Here's how you use the calculator."
+  },
+  {
+   "from": 1963.96,
+   "to": 1966.64,
+   "text": "Use this token combination, et cetera, et cetera."
+  },
+  {
+   "from": 1966.64,
+   "to": 1969.72,
+   "text": "So you have to actually spell it out, because the model by default doesn't know"
+  },
+  {
+   "from": 1969.72,
+   "to": 1971.8,
+   "text": "what it's good at or not good at necessarily,"
+  },
+  {
+   "from": 1971.8,
+   "to": 1975.67,
+   "text": "just like you and I might be."
+  },
+  {
+   "from": 1975.67,
+   "to": 1977.31,
+   "text": "Next up, I think something that is very interesting"
+  },
+  {
+   "from": 1977.31,
+   "to": 1981.51,
+   "text": "is we went from a world that was retrieval-only,"
+  },
+  {
+   "from": 1981.51,
+   "to": 1983.99,
+   "text": "all the way, the pendulum has swung to the other extreme"
+  },
+  {
+   "from": 1983.99,
+   "to": 1986.23,
+   "text": "where it's memory-only in LLMs."
+  },
+  {
+   "from": 1986.23,
+   "to": 1988.59,
+   "text": "But actually there's this entire space in between"
+  },
+  {
+   "from": 1988.59,
+   "to": 1990.71,
+   "text": "of these retrieval augmented models"
+  },
+  {
+   "from": 1990.71,
+   "to": 1993.27,
+   "text": "and this works extremely well in practice."
+  },
+  {
+   "from": 1993.27,
+   "to": 1995.53,
+   "text": "As I mentioned, the context window of a transformer"
+  },
+  {
+   "from": 1995.53,
+   "to": 1997.15,
+   "text": "is it's working memory."
+  },
+  {
+   "from": 1997.15,
+   "to": 1998.91,
+   "text": "If you can load the working memory"
+  },
+  {
+   "from": 1998.91,
+   "to": 2001.43,
+   "text": "with any information that is relevant to the task,"
+  },
+  {
+   "from": 2001.43,
+   "to": 2003.39,
+   "text": "the model will work extremely well"
+  },
+  {
+   "from": 2003.39,
+   "to": 2006.39,
+   "text": "because it can immediately access all that memory."
+  },
+  {
+   "from": 2006.39,
+   "to": 2008.83,
+   "text": "And so I think a lot of people are really interested"
+  },
+  {
+   "from": 2008.83,
+   "to": 2013.15,
+   "text": "in basically retrieval augmented generation."
+  },
+  {
+   "from": 2013.15,
+   "to": 2015.51,
+   "text": "And on the bottom I have like an example of Lama index"
+  },
+  {
+   "from": 2015.51,
+   "to": 2017.35,
+   "text": "which is one sort of data connector"
+  },
+  {
+   "from": 2017.35,
+   "to": 2018.99,
+   "text": "to lots of different types of data"
+  },
+  {
+   "from": 2018.99,
+   "to": 2022.59,
+   "text": "and you can index all of that data"
+  },
+  {
+   "from": 2022.59,
+   "to": 2024.31,
+   "text": "and you can make it accessible to LLMs."
+  },
+  {
+   "from": 2024.31,
+   "to": 2026.11,
+   "text": "And the emerging recipe there is"
+  },
+  {
+   "from": 2026.11,
+   "to": 2027.67,
+   "text": "you take relevant documents,"
+  },
+  {
+   "from": 2027.67,
+   "to": 2030.67,
+   "text": "you split them up into chunks, you embed all of them,"
+  },
+  {
+   "from": 2030.67,
+   "to": 2032.07,
+   "text": "and you basically get embedding vectors"
+  },
+  {
+   "from": 2032.07,
+   "to": 2033.55,
+   "text": "that represent that data."
+  },
+  {
+   "from": 2033.55,
+   "to": 2035.23,
+   "text": "You store that in the vector store,"
+  },
+  {
+   "from": 2035.23,
+   "to": 2037.55,
+   "text": "and then at test time, you make some kind of a query"
+  },
+  {
+   "from": 2037.55,
+   "to": 2039.87,
+   "text": "to your vector store, and you fetch chunks"
+  },
+  {
+   "from": 2039.87,
+   "to": 2041.83,
+   "text": "that might be relevant to your task,"
+  },
+  {
+   "from": 2041.83,
+   "to": 2043.11,
+   "text": "and you stuff them into the prompt,"
+  },
+  {
+   "from": 2043.11,
+   "to": 2044.23,
+   "text": "and then you generate."
+  },
+  {
+   "from": 2044.23,
+   "to": 2046.39,
+   "text": "So this can work quite well in practice."
+  },
+  {
+   "from": 2046.39,
+   "to": 2048.43,
+   "text": "So this is, I think, similar to when you and I"
+  },
+  {
+   "from": 2048.43,
+   "to": 2051.27,
+   "text": "solve problems, you can do everything from your memory,"
+  },
+  {
+   "from": 2051.27,
+   "to": 2053.83,
+   "text": "and transformers have very large and extensive memory,"
+  },
+  {
+   "from": 2053.83,
+   "to": 2056.23,
+   "text": "but also it really helps to reference"
+  },
+  {
+   "from": 2056.23,
+   "to": 2057.75,
+   "text": "some primary documents."
+  },
+  {
+   "from": 2057.75,
+   "to": 2060.27,
+   "text": "So whenever you find yourself going back to a textbook"
+  },
+  {
+   "from": 2060.27,
+   "to": 2062.63,
+   "text": "to find something, or whenever you find yourself going back"
+  },
+  {
+   "from": 2062.63,
+   "to": 2064.99,
+   "text": "to documentation of a library to look something up,"
+  },
+  {
+   "from": 2064.99,
+   "to": 2067.83,
+   "text": "the transformers definitely want to do that too."
+  },
+  {
+   "from": 2067.83,
+   "to": 2071.03,
+   "text": "You have some memory over how some documentation"
+  },
+  {
+   "from": 2071.03,
+   "to": 2073.39,
+   "text": "of a library works, but it's much better to look it up."
+  },
+  {
+   "from": 2073.39,
+   "to": 2077.01,
+   "text": "So the same applies here."
+  },
+  {
+   "from": 2077.01,
+   "to": 2079.73,
+   "text": "Next, I wanted to briefly talk about constraint prompting."
+  },
+  {
+   "from": 2079.73,
+   "to": 2082.25,
+   "text": "I also find this very interesting."
+  },
+  {
+   "from": 2082.25,
+   "to": 2088.61,
+   "text": "This is basically techniques for forcing a certain template"
+  },
+  {
+   "from": 2088.61,
+   "to": 2090.29,
+   "text": "in the outputs of LLMs."
+  },
+  {
+   "from": 2090.29,
+   "to": 2093.37,
+   "text": "So guidance is one example from Microsoft, actually."
+  },
+  {
+   "from": 2093.37,
+   "to": 2096.53,
+   "text": "And here we are enforcing that the output from the LLM"
+  },
+  {
+   "from": 2096.53,
+   "to": 2097.89,
+   "text": "will be JSON."
+  },
+  {
+   "from": 2097.89,
+   "to": 2099.93,
+   "text": "And this will actually guarantee"
+  },
+  {
+   "from": 2099.93,
+   "to": 2101.61,
+   "text": "that the output will take on this form"
+  },
+  {
+   "from": 2101.61,
+   "to": 2102.85,
+   "text": "because they go in and they mess"
+  },
+  {
+   "from": 2102.85,
+   "to": 2104.65,
+   "text": "with the probabilities of all the different tokens that"
+  },
+  {
+   "from": 2104.65,
+   "to": 2107.61,
+   "text": "come out of the transformer, and they clamp those tokens."
+  },
+  {
+   "from": 2107.61,
+   "to": 2108.73,
+   "text": "And then the transformer is only"
+  },
+  {
+   "from": 2108.73,
+   "to": 2109.97,
+   "text": "filling in the blanks here."
+  },
+  {
+   "from": 2109.97,
+   "to": 2111.73,
+   "text": "And then you can enforce additional restrictions"
+  },
+  {
+   "from": 2111.73,
+   "to": 2113.53,
+   "text": "on what could go into those blanks."
+  },
+  {
+   "from": 2113.53,
+   "to": 2114.89,
+   "text": "So this might be really helpful,"
+  },
+  {
+   "from": 2114.89,
+   "to": 2116.39,
+   "text": "and I think this kind of constraint sampling"
+  },
+  {
+   "from": 2116.39,
+   "to": 2120.28,
+   "text": "is also extremely interesting."
+  },
+  {
+   "from": 2120.28,
+   "to": 2122.56,
+   "text": "I also wanted to say a few words about fine-tuning."
+  },
+  {
+   "from": 2122.56,
+   "to": 2124.54,
+   "text": "It is the case that you can get really far"
+  },
+  {
+   "from": 2124.54,
+   "to": 2126.24,
+   "text": "with prompt engineering,"
+  },
+  {
+   "from": 2126.24,
+   "to": 2128.56,
+   "text": "but it's also possible to think about fine-tuning"
+  },
+  {
+   "from": 2128.56,
+   "to": 2129.72,
+   "text": "your models."
+  },
+  {
+   "from": 2129.72,
+   "to": 2131.96,
+   "text": "Now, fine-tuning models means that you are actually"
+  },
+  {
+   "from": 2131.96,
+   "to": 2134.44,
+   "text": "going to change the weights of the model."
+  },
+  {
+   "from": 2134.44,
+   "to": 2135.92,
+   "text": "It is becoming a lot more accessible"
+  },
+  {
+   "from": 2135.92,
+   "to": 2137.32,
+   "text": "to do this in practice,"
+  },
+  {
+   "from": 2137.32,
+   "to": 2139.52,
+   "text": "and that's because of a number of techniques"
+  },
+  {
+   "from": 2139.52,
+   "to": 2141.04,
+   "text": "that have been developed and have libraries"
+  },
+  {
+   "from": 2141.04,
+   "to": 2143.24,
+   "text": "for very recently."
+  },
+  {
+   "from": 2143.24,
+   "to": 2145.36,
+   "text": "So for example, parameter-efficient fine-tuning techniques"
+  },
+  {
+   "from": 2145.36,
+   "to": 2148.8,
+   "text": "like Laura, make sure that you're only training"
+  },
+  {
+   "from": 2148.8,
+   "to": 2151.08,
+   "text": "small sparse pieces of your model."
+  },
+  {
+   "from": 2151.08,
+   "to": 2153.96,
+   "text": "So most of the model is kept clamped at the base model,"
+  },
+  {
+   "from": 2153.96,
+   "to": 2156.04,
+   "text": "and some pieces of it are allowed to change,"
+  },
+  {
+   "from": 2156.04,
+   "to": 2158.04,
+   "text": "and this still works pretty well empirically,"
+  },
+  {
+   "from": 2158.04,
+   "to": 2160.0,
+   "text": "and makes it much cheaper to sort of tune"
+  },
+  {
+   "from": 2160.0,
+   "to": 2161.64,
+   "text": "only small pieces of your model."
+  },
+  {
+   "from": 2163.16,
+   "to": 2165.82,
+   "text": "It also means that because most of your model is clamped,"
+  },
+  {
+   "from": 2165.82,
+   "to": 2167.96,
+   "text": "you can use very low precision inference"
+  },
+  {
+   "from": 2167.96,
+   "to": 2169.52,
+   "text": "for computing those parts,"
+  },
+  {
+   "from": 2169.52,
+   "to": 2170.68,
+   "text": "because they are not gonna be updated"
+  },
+  {
+   "from": 2170.68,
+   "to": 2171.8,
+   "text": "by gradient descent,"
+  },
+  {
+   "from": 2171.8,
+   "to": 2174.36,
+   "text": "And so that makes everything a lot more efficient as well."
+  },
+  {
+   "from": 2174.36,
+   "to": 2176.36,
+   "text": "And in addition, we have a number of open sourced"
+  },
+  {
+   "from": 2176.36,
+   "to": 2177.56,
+   "text": "high-quality-based models."
+  },
+  {
+   "from": 2177.56,
+   "to": 2180.2,
+   "text": "Currently, as I mentioned, I think Lama is quite nice,"
+  },
+  {
+   "from": 2180.2,
+   "to": 2182.08,
+   "text": "although it is not commercially licensed,"
+  },
+  {
+   "from": 2182.08,
+   "to": 2183.08,
+   "text": "I believe right now."
+  },
+  {
+   "from": 2184.4,
+   "to": 2186.72,
+   "text": "Something to keep in mind is that basically,"
+  },
+  {
+   "from": 2186.72,
+   "to": 2189.68,
+   "text": "fine-tuning is a lot more technically involved."
+  },
+  {
+   "from": 2189.68,
+   "to": 2190.92,
+   "text": "It requires a lot more, I think,"
+  },
+  {
+   "from": 2190.92,
+   "to": 2192.84,
+   "text": "technical expertise to do right."
+  },
+  {
+   "from": 2192.84,
+   "to": 2195.6,
+   "text": "It requires human data contractors for data sets"
+  },
+  {
+   "from": 2195.6,
+   "to": 2197.04,
+   "text": "and or synthetic data pipelines"
+  },
+  {
+   "from": 2197.04,
+   "to": 2198.8,
+   "text": "that can be pretty complicated."
+  },
+  {
+   "from": 2198.8,
+   "to": 2200.08,
+   "text": "This will definitely slow down"
+  },
+  {
+   "from": 2200.08,
+   "to": 2205.68,
+   "text": "your iteration cycle by a lot. And I would say on a high level, SFD is achievable because"
+  },
+  {
+   "from": 2205.68,
+   "to": 2210.0,
+   "text": "it is just your continuing language modeling task. It's relatively straightforward. But"
+  },
+  {
+   "from": 2210.0,
+   "to": 2216.08,
+   "text": "RLHF, I would say, is very much research territory and is even much harder to get to work. And"
+  },
+  {
+   "from": 2216.08,
+   "to": 2220.88,
+   "text": "so I would probably not advise that someone just tries to roll their own RLHF implementation."
+  },
+  {
+   "from": 2220.88,
+   "to": 2224.68,
+   "text": "These things are pretty unstable, very difficult to train, not something that is I think"
+  },
+  {
+   "from": 2224.68,
+   "to": 2229.12,
+   "text": "very beginner-friendly right now. And it's also potentially likely also to change"
+  },
+  {
+   "from": 2229.12,
+   "to": 2232.4,
+   "text": "pretty rapidly still."
+  },
+  {
+   "from": 2232.4,
+   "to": 2235.8,
+   "text": "So I think these are my sort of default recommendations right now."
+  },
+  {
+   "from": 2235.8,
+   "to": 2238.52,
+   "text": "I would break up your task into two major parts."
+  },
+  {
+   "from": 2238.52,
+   "to": 2242.8,
+   "text": "Number one, achieve your top performance, and number two, optimize your performance in"
+  },
+  {
+   "from": 2242.8,
+   "to": 2244.6,
+   "text": "that order."
+  },
+  {
+   "from": 2244.6,
+   "to": 2247.76,
+   "text": "Number one, the best performance will currently come from GPD4 model."
+  },
+  {
+   "from": 2247.76,
+   "to": 2250.24,
+   "text": "It is the most capable model by far."
+  },
+  {
+   "from": 2250.24,
+   "to": 2252.08,
+   "text": "Use prompts that are very detailed."
+  },
+  {
+   "from": 2252.08,
+   "to": 2256.8,
+   "text": "They have lots of task contents, relevant information and instructions."
+  },
+  {
+   "from": 2256.8,
+   "to": 2260.92,
+   "text": "along the lines of what would you tell a task contractor if they can't email you back,"
+  },
+  {
+   "from": 2260.92,
+   "to": 2264.96,
+   "text": "but then also keep in mind that a task contractor is a human and they have inner monologue and"
+  },
+  {
+   "from": 2264.96,
+   "to": 2268.72,
+   "text": "they're very clever, et cetera, LLMs do not possess those qualities."
+  },
+  {
+   "from": 2268.72,
+   "to": 2275.88,
+   "text": "So make sure to think through the psychology of the LLM almost and cater prompts to that."
+  },
+  {
+   "from": 2275.88,
+   "to": 2280.88,
+   "text": "Retrieve and add any relevant context and information to these prompts."
+  },
+  {
+   "from": 2280.88,
+   "to": 2283.2,
+   "text": "Basically refer to a lot of the prompt engineering techniques."
+  },
+  {
+   "from": 2283.2,
+   "to": 2287.28,
+   "text": "Some of them I've highlighted in the slides above, but also this is a very large space"
+  },
+  {
+   "from": 2287.28,
+   "to": 2291.88,
+   "text": "and I would just advise you to look for prompt engineering techniques online."
+  },
+  {
+   "from": 2291.88,
+   "to": 2294.2,
+   "text": "There's a lot to cover there."
+  },
+  {
+   "from": 2294.2,
+   "to": 2295.88,
+   "text": "Experiment with few-shot examples."
+  },
+  {
+   "from": 2295.88,
+   "to": 2300.04,
+   "text": "What this refers to is you don't just want to tell, you want to show whenever it's possible."
+  },
+  {
+   "from": 2300.04,
+   "to": 2303.96,
+   "text": "So give it examples of everything that helps you really understand what you mean if"
+  },
+  {
+   "from": 2303.96,
+   "to": 2306.16,
+   "text": "you can."
+  },
+  {
+   "from": 2306.16,
+   "to": 2311.24,
+   "text": "Experiment with tools and plugins to offload a task that are difficult for LLMs natively"
+  },
+  {
+   "from": 2311.24,
+   "to": 2315.08,
+   "text": "And then think about not just a single prompt and answer, think about potential chains and"
+  },
+  {
+   "from": 2315.08,
+   "to": 2319.0,
+   "text": "reflection and how you glue them together and how you could potentially make multiple samples"
+  },
+  {
+   "from": 2319.0,
+   "to": 2320.2,
+   "text": "and so on."
+  },
+  {
+   "from": 2320.2,
+   "to": 2324.28,
+   "text": "Finally, if you think you've squeezed out prompt engineering, which I think you should"
+  },
+  {
+   "from": 2324.28,
+   "to": 2331.48,
+   "text": "stick with for a while, look at some potentially fine-tuning a model to your application"
+  },
+  {
+   "from": 2331.48,
+   "to": 2334.28,
+   "text": "but expect this to be a lot more slower and involved."
+  },
+  {
+   "from": 2334.28,
+   "to": 2338.56,
+   "text": "And then there's an expert fragile research zone here and I would say that is RLHF"
+  },
+  {
+   "from": 2338.56,
+   "to": 2341.32,
+   "text": "which currently does work a bit better than SFT"
+  },
+  {
+   "from": 2341.32,
+   "to": 2342.36,
+   "text": "if you can get it to work,"
+  },
+  {
+   "from": 2342.36,
+   "to": 2345.44,
+   "text": "but again, this is pretty involved, I would say."
+  },
+  {
+   "from": 2345.44,
+   "to": 2346.52,
+   "text": "And to optimize your costs,"
+  },
+  {
+   "from": 2346.52,
+   "to": 2349.24,
+   "text": "try to explore lower capacity models"
+  },
+  {
+   "from": 2349.24,
+   "to": 2353.32,
+   "text": "or shorter prompts and so on."
+  },
+  {
+   "from": 2353.32,
+   "to": 2355.8,
+   "text": "I also wanted to say a few words about the use cases"
+  },
+  {
+   "from": 2355.8,
+   "to": 2358.8,
+   "text": "in which I think LLMs are currently well suited for."
+  },
+  {
+   "from": 2358.8,
+   "to": 2359.64,
+   "text": "So in particular,"
+  },
+  {
+   "from": 2359.64,
+   "to": 2361.36,
+   "text": "note that there's a large number of limitations"
+  },
+  {
+   "from": 2361.36,
+   "to": 2362.8,
+   "text": "to LLMs today,"
+  },
+  {
+   "from": 2362.8,
+   "to": 2365.0,
+   "text": "and so I would keep that definitely in mind"
+  },
+  {
+   "from": 2365.0,
+   "to": 2366.44,
+   "text": "for all your applications."
+  },
+  {
+   "from": 2366.44,
+   "to": 2367.56,
+   "text": "Models, and this, by the way,"
+  },
+  {
+   "from": 2367.56,
+   "to": 2368.68,
+   "text": "could be an entire talk,"
+  },
+  {
+   "from": 2368.68,
+   "to": 2370.76,
+   "text": "So I don't have time to cover it in full detail."
+  },
+  {
+   "from": 2370.76,
+   "to": 2372.0,
+   "text": "Models may be biased."
+  },
+  {
+   "from": 2372.0,
+   "to": 2374.08,
+   "text": "They may fabricate hallucinate information."
+  },
+  {
+   "from": 2374.08,
+   "to": 2375.84,
+   "text": "They may have reasoning errors."
+  },
+  {
+   "from": 2375.84,
+   "to": 2378.72,
+   "text": "They may struggle in entire classes of applications."
+  },
+  {
+   "from": 2378.72,
+   "to": 2381.04,
+   "text": "They have knowledge cutoffs, so they might not know"
+  },
+  {
+   "from": 2381.04,
+   "to": 2384.04,
+   "text": "any information above, say, September 2021."
+  },
+  {
+   "from": 2384.04,
+   "to": 2386.56,
+   "text": "They are susceptible to a large range of attacks"
+  },
+  {
+   "from": 2386.56,
+   "to": 2388.96,
+   "text": "which are sort of like coming out on Twitter daily,"
+  },
+  {
+   "from": 2388.96,
+   "to": 2391.08,
+   "text": "including prompt injection, jailbreak attacks,"
+  },
+  {
+   "from": 2391.08,
+   "to": 2393.18,
+   "text": "data poisoning attacks, and so on."
+  },
+  {
+   "from": 2393.18,
+   "to": 2395.64,
+   "text": "So my recommendation right now is use LLMs"
+  },
+  {
+   "from": 2395.64,
+   "to": 2397.72,
+   "text": "in low stakes applications,"
+  },
+  {
+   "from": 2397.72,
+   "to": 2400.4,
+   "text": "combine them with always with human oversight,"
+  },
+  {
+   "from": 2400.4,
+   "to": 2403.0,
+   "text": "use them as a source of inspiration and suggestions"
+  },
+  {
+   "from": 2403.0,
+   "to": 2405.92,
+   "text": "and think co-pilots instead of completely autonomous agents"
+  },
+  {
+   "from": 2405.92,
+   "to": 2408.08,
+   "text": "that are just like performing a task somewhere."
+  },
+  {
+   "from": 2408.08,
+   "to": 2412.53,
+   "text": "It's just not clear that the models are there right now."
+  },
+  {
+   "from": 2412.53,
+   "to": 2414.09,
+   "text": "So I wanted to close by saying that GPT-4"
+  },
+  {
+   "from": 2414.09,
+   "to": 2415.21,
+   "text": "is an amazing artifact."
+  },
+  {
+   "from": 2415.21,
+   "to": 2418.41,
+   "text": "I'm very thankful that it exists and it's beautiful."
+  },
+  {
+   "from": 2418.41,
+   "to": 2420.45,
+   "text": "It has a ton of knowledge across so many areas."
+  },
+  {
+   "from": 2420.45,
+   "to": 2423.21,
+   "text": "It can do math, code, and so on."
+  },
+  {
+   "from": 2423.21,
+   "to": 2425.25,
+   "text": "And in addition, there's this thriving ecosystem"
+  },
+  {
+   "from": 2425.25,
+   "to": 2427.01,
+   "text": "of everything else that is being built"
+  },
+  {
+   "from": 2427.01,
+   "to": 2429.49,
+   "text": "and incorporate it into the ecosystem."
+  },
+  {
+   "from": 2429.49,
+   "to": 2432.25,
+   "text": "Some of these things I've talked about."
+  },
+  {
+   "from": 2432.25,
+   "to": 2435.97,
+   "text": "And all of this power is accessible at your fingertips."
+  },
+  {
+   "from": 2435.97,
+   "to": 2438.69,
+   "text": "So here's everything that's needed in terms of code"
+  },
+  {
+   "from": 2438.69,
+   "to": 2442.69,
+   "text": "to ask GPT-4 a question, to prompt it and get a response."
+  },
+  {
+   "from": 2442.69,
+   "to": 2445.01,
+   "text": "In this case, I said, can you say something"
+  },
+  {
+   "from": 2445.01,
+   "to": 2448.09,
+   "text": "to inspire the audience of Microsoft Build 2023?"
+  },
+  {
+   "from": 2448.09,
+   "to": 2449.89,
+   "text": "And I just punched this into Python"
+  },
+  {
+   "from": 2449.89,
+   "to": 2454.25,
+   "text": "and verbatim, GPT-4 said the following."
+  },
+  {
+   "from": 2454.25,
+   "to": 2455.41,
+   "text": "And by the way, I did not know"
+  },
+  {
+   "from": 2455.41,
+   "to": 2457.49,
+   "text": "that they used this trick in the keynote."
+  },
+  {
+   "from": 2457.49,
+   "to": 2462.89,
+   "text": "So I thought I was being clever, but it is really good at this."
+  },
+  {
+   "from": 2462.89,
+   "to": 2465.31,
+   "text": "It says, ladies and gentlemen, innovators and trailblazers"
+  },
+  {
+   "from": 2465.31,
+   "to": 2467.77,
+   "text": "of Microsoft Build 2023, welcome"
+  },
+  {
+   "from": 2467.77,
+   "to": 2470.21,
+   "text": "to the gathering of brilliant minds like no other."
+  },
+  {
+   "from": 2470.21,
+   "to": 2471.93,
+   "text": "You are the architects of the future,"
+  },
+  {
+   "from": 2471.93,
+   "to": 2474.25,
+   "text": "the visionaries molding the digital realm in which"
+  },
+  {
+   "from": 2474.25,
+   "to": 2475.77,
+   "text": "humanity thrives."
+  },
+  {
+   "from": 2475.77,
+   "to": 2478.01,
+   "text": "Embrace the limitless possibilities of technologies"
+  },
+  {
+   "from": 2478.01,
+   "to": 2480.61,
+   "text": "and let your ideas soar as high as your imagination."
+  },
+  {
+   "from": 2480.61,
+   "to": 2483.01,
+   "text": "Together, let's create a more connected, remarkable,"
+  },
+  {
+   "from": 2483.01,
+   "to": 2485.49,
+   "text": "an inclusive world for generations to come,"
+  },
+  {
+   "from": 2485.49,
+   "to": 2487.45,
+   "text": "get ready to unleash your creativity,"
+  },
+  {
+   "from": 2487.45,
+   "to": 2490.53,
+   "text": "canvass the unknown, and turn dreams into reality."
+  },
+  {
+   "from": 2490.53,
+   "to": 2492.57,
+   "text": "Your journey begins today."
+  },
+  {
+   "from": 2493.57,
+   "to": 2494.41,
+   "text": "Thank you."
+  }
+ ]
+}

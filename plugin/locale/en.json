@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Study buddy for Bilibili courses",
+    "description": "Turn a Bilibili course video into checkable notes: grab frames at a timestamp, scan a time range as one grid, verify AI subtitles against the video, and transcribe a short window with context. Read-only; never likes, comments, or posts.",
+    "detail": "docs/DETAIL.md"
+  }
+}

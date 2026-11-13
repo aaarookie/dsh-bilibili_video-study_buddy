@@ -1,0 +1,27 @@
+# 依赖与产物
+node_modules/
+*.log
+
+# 大体积素材：帧、音视频、缓存
+**/frames/
+**/hd-frames/
+**/crop-test/
+**/res-test/
+**/scan-test/
+**/find-test/
+**/_audio/
+**/_subtest/
+**/asr/*.wav
+**/*.wav
+**/*.mp3
+**/*.mp4
+
+# 凭证与临时
+credential.json
+*bak-*
+.env
+__pycache__/
+*.pyc
+
+# 内部调研原始资料（13 MB 插件索引）
+_sources/awesome-dsh-plugins.json

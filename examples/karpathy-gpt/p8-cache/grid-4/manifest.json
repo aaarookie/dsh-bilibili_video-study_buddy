@@ -1,0 +1,53 @@
+{
+    "video":  "Andrej Karpathy【中英⚡从零构建 GPT（重制版）|Neural Networks: Zero to Hero】",
+    "part":  "P8 State of GPT ｜ BRK216HFS",
+    "bvid":  "BV1mqrTBvEaf",
+    "page":  8,
+    "range":  "32:00 ~ 42:40",
+    "count":  5,
+    "grid":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\grid.jpg",
+    "gridSize":  "1224x450",
+    "gridTokenEst":  585,
+    "cells":  [
+                  {
+                      "index":  1,
+                      "time":  "32:00",
+                      "sec":  1920,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=1920",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\frames\\BV1mqrTBvEaf_P8_1920s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\cell_01.jpg"
+                  },
+                  {
+                      "index":  2,
+                      "time":  "34:08",
+                      "sec":  2048,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=2048",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\frames\\BV1mqrTBvEaf_P8_2048s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\cell_02.jpg"
+                  },
+                  {
+                      "index":  3,
+                      "time":  "36:16",
+                      "sec":  2176,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=2176",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\frames\\BV1mqrTBvEaf_P8_2176s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\cell_03.jpg"
+                  },
+                  {
+                      "index":  4,
+                      "time":  "38:24",
+                      "sec":  2304,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=2304",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\frames\\BV1mqrTBvEaf_P8_2304s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\cell_04.jpg"
+                  },
+                  {
+                      "index":  5,
+                      "time":  "40:32",
+                      "sec":  2432,
+                      "link":  "https://www.bilibili.com/video/BV1mqrTBvEaf?p=8\u0026t=2432",
+                      "original":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\frames\\BV1mqrTBvEaf_P8_2432s_crop.jpg",
+                      "cell":  "examples\\karpathy-gpt\\p8-cache\\grid-4\\cell_05.jpg"
+                  }
+              ]
+}

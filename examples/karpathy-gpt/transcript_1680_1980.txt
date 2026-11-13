@@ -1,0 +1,53 @@
+[lang] en dur=300.0s elapsed=1.1s
+------------------------------------------------------------
+[28:00] match the cross entropy case, and then we should be able to evaluate our loss.
+[28:06] Okay, so with that right now, and we can do loss. And so currently we see that the loss is 4.87.
+[28:14] Now, because we have 65 possible vocabulary elements, we can actually guess at what the
+[28:20] loss should be. And in particular, we covered negative log likelihood in a lot of detail.
+[28:25] We are expecting log or long of one over 65 and negative of that. So we're expecting the loss to
+[28:34] be about 4.1217, but we're getting 4.87. And so that's telling us that the initial predictions are
+[28:41] not super diffuse. They've got a little bit of entropy. And so we're guessing wrong. So, yes.
+[28:49] But actually, we are able to evaluate the loss. Okay, so now that we can evaluate the quality
+[28:54] of the model on some data, we'd like to also be able to generate from the model. So let's do the
+[28:59] generation. Now, I'm going to go again a little bit faster here because I covered all this already
+[29:04] in the previous videos. So here's a generate function for the model. So we take some, we
+[29:14] take the same kind of input IDX here. And basically, this is the current context
+[29:21] of some characters in a batch, in some batch. So it's also b by t. And the job of generate
+[29:29] is to basically take this b by t and extend it to be b by t plus one plus two plus three.
+[29:33] And so it's just basically it continues the generation in all the batch dimensions
+[29:37] in the time dimension. So that's its job. And it will do that for max new tokens.
+[29:42] So you can see here on the bottom, there's going to be some stuff here. But on the bottom,
+[29:46] whatever is predicted is concatenated on top of the previous IDX along the first dimension,
+[29:52] which is the time dimension, to create a b by t plus one. So that becomes a new IDX.
+[29:58] So the job of generate is to take a b by t and make it a b by t plus one plus two plus three
+[30:03] as many as we want max new tokens. So this is the generation from the model.
+[30:08] Now inside the generation, what are we doing? We're taking the current indices,
+[30:12] we're getting the predictions. So we get those are in the logits. And then the loss here is going
+[30:19] to be ignored because we're not we're not using that. And we have no targets that are sort of
+[30:24] ground truth targets that we're going to be comparing with. Then once we get the logits,
+[30:29] we are only focusing on the last step. So instead of a b by t by c, we're going to
+[30:35] pluck out the negative one, the last element in the time dimension, because those are the
+[30:40] predictions for what comes next. So that gives us the logits, which we then cover to probabilities
+[30:45] via softmax. And then we use torsion multinomials to sample from those probabilities. And we ask
+[30:51] PyTorch to give us one sample. And so IDX next will become a b by one, because in each one of
+[30:58] the batch dimensions, we're going to have a single prediction for what comes next. So this num
+[31:03] samples equals one will make this be a one. And then we're going to take those integers
+[31:09] that come from the sampling process, according to the probability distribution given here.
+[31:13] And those integers can just concatenate it on top of the current sort of like running stream
+[31:17] of integers. And this gives us a b by t plus one. And then we can return that. Now, one thing here
+[31:24] is, you see how I'm calling self of IDX, which will end up going to the forward function.
+[31:30] I'm not providing any targets. So currently, this would give an error because targets
+[31:35] is sort of like not given. So targets has to be optional. So targets is none by default.
+[31:42] And then if targets is none, then there's no loss to create. So it's just loss is none.
+[31:48] But else, all of this happens and we can create a loss. So this will make it so
+[31:55] if we have the targets, we provide them and get a loss. If we have no targets,
+[31:58] it will just get the logits. So this here will generate from the model.
+[32:04] And let's take that for a ride now. Oops. So I have another code chunk here,
+[32:12] which will generate for the model from the model. And okay, this is kind of crazy.
+[32:16] So maybe let me let you break this down. So these are the IDX, right? I'm creating a batch
+[32:26] will be just one time will be just one. So I'm creating a little one by one tensor,
+[32:31] and it's holding a zero. And the data type is integer. So zero is going to be how we kick off
+[32:38] the generation. And remember that zero is the element standing for a new line character. So it's
+[32:45] kind of like a reasonable thing to feed in as the very first character in a sequence to be the
+[32:50] new line. So it's going to be IDX, which we're going to feed in here. Then we're going to
+[32:56] ask for 100 tokens and then end up generate
