@@ -1,0 +1,45 @@
+{
+ "video": "BV1mqrTBvEaf",
+ "page": 7,
+ "range": "28:00 ~ 33:00",
+ "count": 6,
+ "grid": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\grid.jpg",
+ "cells": [
+  {
+   "num": "01",
+   "time": "28:00",
+   "original": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\frames\\BV1mqrTBvEaf_P7_1680s_crop.jpg",
+   "cell": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\cell_01.jpg"
+  },
+  {
+   "num": "02",
+   "time": "29:00",
+   "original": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\frames\\BV1mqrTBvEaf_P7_1740s_crop.jpg",
+   "cell": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\cell_02.jpg"
+  },
+  {
+   "num": "03",
+   "time": "30:00",
+   "original": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\frames\\BV1mqrTBvEaf_P7_1800s_crop.jpg",
+   "cell": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\cell_03.jpg"
+  },
+  {
+   "num": "04",
+   "time": "31:00",
+   "original": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\frames\\BV1mqrTBvEaf_P7_1860s_crop.jpg",
+   "cell": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\cell_04.jpg"
+  },
+  {
+   "num": "05",
+   "time": "32:00",
+   "original": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\frames\\BV1mqrTBvEaf_P7_1920s_crop.jpg",
+   "cell": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\cell_05.jpg"
+  },
+  {
+   "num": "06",
+   "time": "33:00",
+   "original": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\frames\\BV1mqrTBvEaf_P7_1980s_crop.jpg",
+   "cell": "E:\\diancimoxing\\dshbilibili\\examples\\plugin-test\\scan\\cell_06.jpg"
+  }
+ ]
+}

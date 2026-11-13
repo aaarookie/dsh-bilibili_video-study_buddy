@@ -177,10 +177,10 @@ async function doFrame(args, config) {
   const qn = Number(args.quality ?? 0) || (cred.cookie ? 80 : 32)
   const play = await getPlayUrl(bvid, pageInfo.cid, qn, cred.cookie, referer)
 
-  const tracks = play.video || []
+  const tracks = play.dash?.video || []
   const track = tracks.filter((t) => /^avc1/i.test(t.codecs || '')).sort((a, b) => Number(b.id) - Number(a.id))[0]
     || tracks.sort((a, b) => Number(b.id) - Number(a.id))[0]
-  if (!track) throw new Error('没有可用的视频轨')
+  if (!track) throw new Error(`没有可用的视频轨（dash.video=${tracks.length} 条）`)
 
   const srcW = Number(track.width)
   const srcH = Number(track.height)
@@ -343,7 +343,7 @@ async function doScan(args, config) {
     `拼图：${existsSync(grid) ? grid : '（拼图失败，见 cell_*.jpg）'}`,
     '',
   ]
-  cells.forEach((c) => lines.push(`[${c.num}] ${c.time}  ${c.original}`))
+  cells.forEach((c) => lines.push(`[${c.num}] ${c.time}  ${c.file}`))
   lines.push('', `原图目录：${framesDir}`, `清单：${join(outDir, 'manifest.json')}`)
   return lines.join('\n')
 }
@@ -490,8 +490,8 @@ async function doAsr(args, config) {
   if (toSec <= fromSec) throw new Error('结束时间必须大于开始时间')
 
   const play = await getPlayUrl(bvid, pageInfo.cid, 32, cred.cookie, referer)
-  const audio = (play.audio || []).sort((a, b) => Number(b.id) - Number(a.id))[0]
-  if (!audio) throw new Error('取不到音频轨')
+  const audio = (play.dash?.audio || []).sort((a, b) => Number(b.id) - Number(a.id))[0]
+  if (!audio) throw new Error(`取不到音频轨（dash.audio=${(play.dash?.audio || []).length} 条）`)
 
   const outDir = resolve(args.outDir || join(process.cwd(), 'study-asr'))
   mkdirSync(outDir, { recursive: true })
@@ -561,12 +561,13 @@ const TEXT_OUTPUT = {
 export function apply(ctx, config = {}) {
   const toolsSvc = (() => { try { return ctx.get('tools') } catch { return null } })()
   if (!toolsSvc?.register) {
-    try { ctx.logger?.warn?.('[dsh-study-buddy] tools 服务不可用，工具未注册') } catch { }
-    return
+    throw new Error('[dsh-bilibili-video-study_buddy] tools 服务不可用，无法注册 study_* 工具')
   }
   if (!defineTool) {
-    try { ctx.logger?.warn?.('[dsh-study-buddy] 缺少 @deepseek-ai/dsh-tools，工具未注册') } catch { }
-    return
+    // 必须抛错而不是静默 return：否则插件会显示「已启用」但一个工具都没有，极难排查。
+    // 常见原因是用 link: 安装导致依赖解析不到 @deepseek-ai/dsh-tools（改用 file: 协议）。
+    throw new Error('[dsh-bilibili-video-study_buddy] 无法加载 @deepseek-ai/dsh-tools，工具无法注册。'
+      + ' 若用本地安装，请使用 file: 协议而不是 link:（link 会按真实路径解析依赖，找不到 profile 的 node_modules）。')
   }
 
   const wrap = (fn) => async (args) => {
@@ -641,5 +642,10 @@ export function apply(ctx, config = {}) {
     execute: wrap(doAsr),
   })))
 
-  try { ctx.effect?.(() => { for (const d of disposers) { try { d?.() } catch { } } }) } catch { }
+  // ctx.effect 接收「返回 cleanup 的 setup 函数」；直接在里面 dispose 会让工具刚注册就被注销。
+  try {
+    ctx.effect?.(() => () => {
+      for (const d of disposers) { try { d?.() } catch { } }
+    })
+  } catch { }
 }
