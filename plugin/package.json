@@ -1,6 +1,6 @@
 {
   "name": "dsh-bilibili_video-study_buddy",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Bilibili course study buddy for DeepSeek Harness: timestamped frame capture, range scan grids, AI subtitle verification, and windowed ASR.",
   "type": "module",
   "main": "index.js",

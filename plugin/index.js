@@ -14,7 +14,7 @@
  *   - 不猜：时间点越界、字幕可疑、依赖缺失，都明确报错而不是静默降级
  */
 import { execFile } from 'node:child_process'
-import { existsSync, mkdirSync, readFileSync, writeFileSync, copyFileSync, statSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, copyFileSync, statSync, rmSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { join, dirname, resolve, basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -330,6 +330,8 @@ async function doScan(args, config) {
     await sh(ff, ['-y', '-loglevel', 'error', '-framerate', '1', '-i', join(seqDir, 's%02d.jpg'),
       '-vf', `tile=${cols}x${rows}:padding=6:margin=6`, '-frames:v', '1', '-q:v', '3', grid])
   } catch { /* 拼图失败保留逐格 */ }
+  // 清理拼图用的中间副本，别在输出目录里堆垃圾
+  try { rmSync(seqDir, { recursive: true, force: true }) } catch { }
 
   const manifest = {
     video: bvid, page, range: `${args.from} ~ ${args.to}`, count: cells.length,
