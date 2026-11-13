@@ -1,4 +1,4 @@
-# dsh-study-buddy · B 站网课伴学（插件）
+# dsh-bilibili_video-study_buddy · B 站网课伴学（插件）
 
 > 本仓库：<https://github.com/aaarookie/dsh-bilibili_video-study_buddy>
 > 插件包目录：`plugin/`
@@ -48,7 +48,7 @@
 ## 安装
 
 ```bash
-dsh plugin --profile web add dsh-study-buddy
+dsh plugin --profile web add dsh-bilibili_video-study_buddy
 ```
 
 或在 DSH 的 **设置 → 插件 → 添加插件** 填包名，装完重启一次。

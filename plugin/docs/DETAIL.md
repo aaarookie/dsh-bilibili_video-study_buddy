@@ -1,4 +1,4 @@
-# B 站网课伴学（dsh-study-buddy）
+# B 站网课伴学（dsh-bilibili_video-study_buddy）
 
 给 DSH 模型四个工具，把「看一节课」拆成可组合的原子动作。核心判断是：
 **模型不该“看整段视频”，而该在正确的时间点看正确的画面。**
@@ -52,7 +52,7 @@ B 站的 AI 字幕会**串台**——实测一门 GPT 课拿到了“核能/浓�
 ## 安装
 
 ```bash
-dsh plugin --profile web add dsh-study-buddy
+dsh plugin --profile web add dsh-bilibili_video-study_buddy
 ```
 
 或在 DSH 的 **设置 → 插件 → 添加插件** 里填包名。
@@ -81,7 +81,7 @@ dsh plugin --profile web add dsh-study-buddy
 ## 配置
 
 ```yaml
-- id: dsh-study-buddy
+- id: dsh-bilibili_video-study_buddy
   config:
     credentialFile: ""   # 自定义凭证路径
     ffmpeg: ""           # ffmpeg 绝对路径

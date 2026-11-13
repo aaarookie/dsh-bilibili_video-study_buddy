@@ -1,8 +1,8 @@
-# dsh-study-buddy bundle patch
+# dsh-bilibili_video-study_buddy bundle patch
 # profile 的 dsh.profile.bundles 列出本包名即整层生效
 - insert:
-    - id: dsh-study-buddy
-      name: dsh-study-buddy
+    - id: dsh-bilibili_video-study_buddy
+      name: dsh-bilibili_video-study_buddy
       config:
         # 可选：覆盖凭证文件路径；留空则依次找
         #   $DSH_HOME/bili-watch/credential.json

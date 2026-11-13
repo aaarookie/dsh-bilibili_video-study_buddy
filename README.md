@@ -1,13 +1,13 @@
 # dsh-bilibili_video-study_buddy
 
-[![npm](https://img.shields.io/npm/v/dsh-study-buddy.svg)](https://www.npmjs.com/package/dsh-study-buddy) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![npm](https://img.shields.io/npm/v/dsh-bilibili_video-study_buddy.svg)](https://www.npmjs.com/package/dsh-bilibili_video-study_buddy) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
 > Let the model look at **the right frame at the right timestamp**, then turn a lecture into checkable notes.
 
 A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) plugin, plus the methodology and real note artifacts behind it.
 
-**Repo**: <https://github.com/aaarookie/dsh-bilibili_video-study_buddy> ｜ **Plugin**: `plugin/` (npm: `dsh-study-buddy`) ｜ **中文说明**: [README.zh.md](README.zh.md)
+**Repo**: <https://github.com/aaarookie/dsh-bilibili_video-study_buddy> ｜ **Plugin**: `plugin/` (npm: `dsh-bilibili_video-study_buddy`) ｜ **中文说明**: [README.zh.md](README.zh.md)
 
 ---
 
@@ -53,7 +53,7 @@ and refuses to emit the body when the verdict is FAIL.
 ## Install
 
 ```bash
-dsh plugin --profile web add dsh-study-buddy
+dsh plugin --profile web add dsh-bilibili_video-study_buddy
 ```
 
 Or in DSH: **Settings → Plugins → Add plugin** and enter the package name. Restart DSH once.

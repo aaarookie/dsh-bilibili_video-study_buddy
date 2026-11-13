@@ -1,11 +1,11 @@
 # dsh-bilibili_video-study_buddy · B 站网课伴学
 
-[![npm](https://img.shields.io/npm/v/dsh-study-buddy.svg)](https://www.npmjs.com/package/dsh-study-buddy) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![npm](https://img.shields.io/npm/v/dsh-bilibili_video-study_buddy.svg)](https://www.npmjs.com/package/dsh-bilibili_video-study_buddy) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
 > 让 AI 在**正确的时间点**看**正确的画面**，把一节课变成可核查的图文笔记。
 >
-> 仓库：<https://github.com/aaarookie/dsh-bilibili_video-study_buddy> ｜ 插件包：`plugin/`（npm 名 `dsh-study-buddy`）
+> 仓库：<https://github.com/aaarookie/dsh-bilibili_video-study_buddy> ｜ 插件包：`plugin/`（npm 名 `dsh-bilibili_video-study_buddy`）
 
 一个 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件 + 一套实测出来的方法论 + 若干真实笔记样例。
 
@@ -53,9 +53,9 @@ FAIL 时拒绝输出正文。
 
 ```bash
 # 安装插件
-dsh plugin --profile web add dsh-study-buddy
+dsh plugin --profile web add dsh-bilibili_video-study_buddy
 
-# 或者在 DSH：设置 → 插件 → 添加插件 → 填 dsh-study-buddy
+# 或者在 DSH：设置 → 插件 → 添加插件 → 填 dsh-bilibili_video-study_buddy
 ```
 
 依赖：Node ≥ 20、`ffmpeg`（必需）；B 站登录态（可选，用于 1080P + AI 字幕）；
