@@ -25,3 +25,6 @@ __pycache__/
 
 # å†…éƒ¨è°ƒç ”åŸå§‹èµ„æ–™ï¼ˆ13 MB æ’ä»¶ç´¢å¼•ï¼‰
 _sources/awesome-dsh-plugins.json
+
+# ²å¼şÕæÊµ²âÊÔ²úÎï
+examples/plugin-test/
